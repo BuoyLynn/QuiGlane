@@ -12,7 +12,7 @@ class User(db.Model):
     __tablename__ = "users"
 
     user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    user_name = db.Column(db.String(35), nullable=False)
+    user_name = db.Column(db.String(35), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False)
     # find a way for users to confirm email address
     password = db.Column(db.String(64), nullable=False)
@@ -28,7 +28,7 @@ class User(db.Model):
 class Site(db.Model):
     """Diving Site Information"""
 
-    __tablename__ = "site"
+    __tablename__ = "sites"
 
     site_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     # business name (ex. Whole Foods)
@@ -49,7 +49,7 @@ class Site(db.Model):
 class Dive(db.Model):
     """Dive Ratings and Review"""
 
-    __tablename__ = "dive"
+    __tablename__ = "dives"
 
     dive_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     dive_date = db.Column(db.DateTime, nullable=False)
@@ -58,10 +58,10 @@ class Dive(db.Model):
     safety = db.Column(db.Boolean, nullable=False, default=None)
     items = db.Column(db.String(250), nullable=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"), nullable=False)
-    site_id = db.Column(db.Integer, db.ForeignKey("site.site_id"), nullable=False)
+    site_id = db.Column(db.Integer, db.ForeignKey("sites.site_id"), nullable=False)
 
-    user = db.relationship("User", backref="dive")
-    site = db.relationship("Site", backref="site")
+    user = db.relationship("User", backref="dives")
+    site = db.relationship("Site", backref="sites")
 
     def __repr__(self):
 

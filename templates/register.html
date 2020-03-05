@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<div>
+		<form action="" method="POST"> <!--action="" will send to the same route-->
+			{{ form.hidden_tag() }} <!--hidden_tag() method adds a CSRF token-->
+			<fieldset class="registration-form">
+				<legend>Qui Glane? Register and start gleaning.</legend>
+				<div class="registration-form">
+					{{ form.user_name.label }}
+						{% if form.username.errors %}
+						<div class="input-error">
+							{% for error in form.user_name.errors %}
+								<span class="error-message" style="color:red; font-size: small">
+								{{ error }}
+								</span>
+							{% endfor %}
+
+						</div>
+					{{ form.user_name }}
+				</div>
+				<div class="registration-form">
+					{{ form.email.label }}
+					{{ form.email }}
+				</div>
+				<div class="registration-form">
+					{{ form.password.label }}
+					{{ form.password }}
+				</div>
+				<div class="registration-form">
+					{{ form.confirm_password.label }}
+					{{ form.confirm_password }}
+				</div>
+			</fieldset>
+			<div class="registration-form">
+				{{ form.submit(type="submit") }}
+			</div>
+		</form>
+	</div>
+	<div class="text-muted">
+		<p><small>Already a gleaner? 
+			<a class="redirect-login" href="{{ url_for('login') }}">Login</a>
+		</small></p>
+	</div>
+
+    
+{% endblock %}
+
