@@ -15,6 +15,10 @@ app.jinja_env.undefined = StrictUndefined
 def home():
     return render_template("home.html", title="Welcome!")
 
+def login():
+    form = Login()
+    return render_template("login.html", title="Dive in!", form=form)    
+
 @app.route("/register", methods=["GET", "POST"])
 def register():
     form = Register()
@@ -24,10 +28,8 @@ def register():
 
     return render_template("register.html", title="Get Diving!", form=form)
 
-@app.route("/login")
-def login():
-    form = Login()
-    return render_template("login.html", title="Dive in!", form=form)
+
+
 
 
 

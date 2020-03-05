@@ -6,12 +6,12 @@
 			{{ form.hidden_tag() }} <!--hidden_tag() method adds a CSRF token-->
 			<fieldset class="registration-form">
 				
-				<legend>Qui Glane? Register and start gleaning.</legend>
+				<legend>Qui Glane? Register here.</legend>
 				
 				<div class="registration-form">
 					{{ form.user_name.label }}
 						
-					{% if form.username.errors %}
+					{% if form.user_name.errors %}
 					<div class="input-error">
 						{% for error in form.user_name.errors %}
 							<span class="error-message" style="color:red; font-size: small">
