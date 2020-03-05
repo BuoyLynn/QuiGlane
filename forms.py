@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, SelectField, DateField, TimeField, RadioField
 from wtforms.validators import DataRequired, Length, Email, EqualTo
 
 
@@ -24,3 +24,25 @@ class Login(FlaskForm):
     # create a remember me checkbox (bool) by importing BooleanField from wtforms
     remember = BooleanField('Remember me')
     submit = SubmitField('Go Glean')
+
+class Review(FlaskForm):
+    """Dive Review"""
+
+    dive_day = SelectField('Dive Day', validators=[DataRequired()],
+                            choices=[('Sunday', 0),
+                                     ('Monday', 1), 
+                                     ('Tuesday', 2), 
+                                     ('Wednesday', 3), 
+                                     ('Thursday', 4), 
+                                     ('Friday', 5), 
+                                     ('Saturday', 6)])
+    dive_date = DateField('Dive Date', format='%m/%d/%Y')
+    dive_time = TimeField('Dive Time', validators=[DataRequired()])# Set default to utcnow but time only.
+    rating = RadioField('Dive Rating', default=3, choices=[(0, 'Worst'),
+                                                           (1, 'Bad'),
+                                                           (2, 'Poor'),
+                                                           (3, 'Meh'),
+                                                           (4, 'Beneficial'),
+                                                           (5, 'Best')])
+    safety = BooleanField('Safe Dive?')
+    items = StringField('What did you find?', validators=[Length(max=300)])

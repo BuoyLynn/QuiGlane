@@ -52,8 +52,9 @@ class Dive(db.Model):
     __tablename__ = "dives"
 
     dive_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    dive_day = db.Column(db.Integer, nullable=False)
     dive_date = db.Column(db.DateTime, nullable=False)
-    dive_time = db.Column(db.DateTime, nullable=False)
+    dive_time = db.Column(db.Time, nullable=False)
     rating = db.Column(db.Integer, nullable=False)
     safety = db.Column(db.Boolean, nullable=False, default=None)
     items = db.Column(db.String(250), nullable=True)
