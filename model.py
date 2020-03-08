@@ -1,10 +1,9 @@
 from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime, date, time
+
 
 db = SQLAlchemy()
 
-
-#################################
-# Model Definitions
 
 class User(db.Model):
     """User of QuiGlane"""
@@ -13,11 +12,11 @@ class User(db.Model):
 
     user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     user_name = db.Column(db.String(35), nullable=False, unique=True)
-    email = db.Column(db.String(255), nullable=False)
+    email = db.Column(db.String(255), nullable=False, unique=True)
     # find a way for users to confirm email address
     password = db.Column(db.String(64), nullable=False)
-    # figure out a way to hash passwords
     twitter = db.Column(db.String(15), nullable=True)
+    dive = db.relationship("Dive", backref='user', lazy=True)
          
     
     def __repr__(self):
@@ -41,6 +40,7 @@ class Site(db.Model):
     # put in column geo to use GeoAlchemy
     open_time = db.Column(db.DateTime, nullable=True)
     close_time = db.Column(db.DateTime, nullable=True)
+    dive = db.relationship("Dive", backref='site', lazy=True)
 
     def __repr__(self):
 
@@ -54,15 +54,14 @@ class Dive(db.Model):
     dive_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     dive_day = db.Column(db.Integer, nullable=False)
     dive_date = db.Column(db.Date, nullable=False)
-    dive_time = db.Column(db.Time, nullable=False)
+    dive_time = db.Column(db.Time, nullable=False, default=datetime.utcnow)
     rating = db.Column(db.Integer, nullable=False)
     safety = db.Column(db.Boolean, nullable=False, default=None)
     items = db.Column(db.String(250), nullable=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"), nullable=False)
     site_id = db.Column(db.Integer, db.ForeignKey("sites.site_id"), nullable=False)
 
-    user = db.relationship("User", backref="dives")
-    site = db.relationship("Site", backref="sites")
+
 
     def __repr__(self):
 
