@@ -4,7 +4,6 @@ from flask import Flask, render_template, redirect, url_for, flash
 from model import User, Site, Dive, connect_to_db, db
 from forms import Register, Login
 
-
 app = Flask(__name__)
 
 app.config["SECRET_KEY"] = "quiglane"
@@ -15,9 +14,16 @@ app.jinja_env.undefined = StrictUndefined
 def home():
     return render_template("home.html", title="Welcome!")
 
+@app.route("/login", methods=["GET", "POST"])
 def login():
     form = Login()
-    return render_template("login.html", title="Dive in!", form=form)    
+    if form.validate_on_submit():
+        if form.user_name.data == "" and form.password.data == "":
+            flash(f"Welcome back {form.user_name.data}!", "success")
+            return redirect(url_for("home"))
+        else:
+            flash("Login fail. Please check your username & password", "danger")
+    return render_template('login.html', title="Login", form=form)
 
 @app.route("/register", methods=["GET", "POST"])
 def register():

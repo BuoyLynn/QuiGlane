@@ -14,7 +14,7 @@ class Register(FlaskForm):
     # needs to match password using equalto validator (from wtforms.validators)
     confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
 
-    submit = SubmitField('Join the Dive')
+    submit = SubmitField('Join')
 
 
 class Login(FlaskForm):
@@ -24,6 +24,7 @@ class Login(FlaskForm):
     # create a remember me checkbox (bool) by importing BooleanField from wtforms
     remember = BooleanField('Remember me')
     submit = SubmitField('Go Glean')
+
 
 class Review(FlaskForm):
     """Dive Review"""
@@ -46,3 +47,4 @@ class Review(FlaskForm):
                                                            (5, 'Best')])
     safety = BooleanField('Safe Dive?')
     items = StringField('What did you find?', validators=[Length(max=300)])
+    submit = SubmitField('Add Dive')
