@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div>
+	<form action="" method="POST"> <!--action="" will send to the same route-->
+	{{ form.hidden_tag() }} <!--hidden_tag() method adds a CSRF token-->
+	
+	<fieldset class="form">
+			
+		<legend>Login</legend>
+		
+		<div class="form">
+			{{ form.user_name.label }}
+					
+			{% if form.user_name.errors %}
+			<div class="input-error">
+				{% for error in form.user_name.errors %}
+				<span class="error-message" style="color:red; font-size: small">
+				{{ error }}
+				</span>
+				{% endfor %}
+			</div>
+			{% else %}
+				{{ form.user_name }}
+			{% endif %}
+		</div>
+	
+		<div class="form">
+			{{ form.password.label }}
+			
+			{% if form.password.errors %}
+			<div class="input-error">
+				{% for error in form.password.errors %}
+				<span class="error-message" style="color:red; font-size: small">
+				{{ error }}
+				</span>
+				{% endfor %}
+			</div>
+			{% else %}
+				{{ form.password }}
+			{% endif %}
+		</div>
+
+		<div class="form-check">
+			{{ form.remember(class="form-check-input") }}
+			{{ form. remember.label (class="form-check-label") }}
+		</div>
+
+	</fieldset>
+
+		<div class="form">
+			{{ form.submit(class="btn btn-dark btn-sm") }}
+		</div>
+	
+	</form>
+	</div>
+	<div class="text-muted">
+		<p><small>Don't have an account? Register  
+			<a class="redirect-login" href="{{ url_for('register') }}">here.</a>
+		</small></p>
+	</div>
+
+{% endblock %}
