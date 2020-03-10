@@ -1,11 +1,14 @@
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime, date, time
+from flask_login import UserMixin, LoginManager
 
 
 db = SQLAlchemy()
 
 
-class User(db.Model):
+
+class User(UserMixin, db.Model):
+# class User(db.Model):
     """User of QuiGlane"""
 
     __tablename__ = "users"
@@ -15,7 +18,7 @@ class User(db.Model):
     email = db.Column(db.String(255), nullable=False, unique=True)
     # find a way for users to confirm email address
     password = db.Column(db.String(64), nullable=False)
-    twitter = db.Column(db.String(15), nullable=True)
+    # twitter = db.Column(db.String(15), nullable=True)
     dive = db.relationship("Dive", backref='user', lazy=True)
          
     
@@ -61,8 +64,6 @@ class Dive(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"), nullable=False)
     site_id = db.Column(db.Integer, db.ForeignKey("sites.site_id"), nullable=False)
 
-
-
     def __repr__(self):
 
         return f"<Dive @ site_id:{self.site_id} rated {self.rating} by user ID: {self.user_id}>"
@@ -80,10 +81,13 @@ def connect_to_db(app):
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     db.app = app
     db.init_app(app)
+    # login.init_app(app)
 
 
 if __name__ == "__main__":
     
-    from server import app
+    from server import app, login
     connect_to_db(app)
     print("Connected to DB.") # To test in interactive mode
+
+

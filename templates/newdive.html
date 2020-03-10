@@ -2,14 +2,14 @@
 
 {% block content %}
 	<div>
-	<form action="" method="POST"> <!--action="" will send to the same route-->
-		{{ form.hidden_tag() }} <!--hidden_tag() method adds a CSRF token-->
+	<form action="/add-dive/<int: user_id>", method="GET"> 
+		
 		<fieldset class="form">
 			
-			<legend>Qui Glane? Join the dive here.</legend>
+			<legend>Tell us more about your dive.</legend>
 			
 			<div class="form">
-				{{ form.user_name.label }}
+				{{ form.dive_day.label }}
 					
 				{% if form.user_name.errors %}
 				<div class="input-error">
@@ -18,11 +18,11 @@
 						{{ error }}
 						</span>
 					{% endfor %}
-				</div>
+					</div>
 				{% else %}
 					{{ form.user_name }}
 				{% endif %}
-			</div>
+				</div>
 				
 			<div class="form">
 				{{ form.email.label }}
