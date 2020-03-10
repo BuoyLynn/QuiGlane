@@ -38,9 +38,8 @@ class Site(db.Model):
     # type of business (ex. grocery, bakery, etc.)
     category = db.Column(db.String(100), nullable=True)
     address = db.Column(db.String(150), nullable=True)
-    latitude = db.Column(db.Float, nullable=False)
-    longitude = db.Column(db.Float, nullable=False)
-    # put in column geo to use GeoAlchemy
+    latitude = db.Column(db.Float, nullable=True)
+    longitude = db.Column(db.Float, nullable=True)
     open_time = db.Column(db.DateTime, nullable=True)
     close_time = db.Column(db.DateTime, nullable=True)
     dive = db.relationship("Dive", backref='site', lazy=True)
@@ -55,11 +54,11 @@ class Dive(db.Model):
     __tablename__ = "dives"
 
     dive_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    dive_day = db.Column(db.Integer, nullable=False)
-    dive_date = db.Column(db.Date, nullable=False)
-    dive_time = db.Column(db.Time, nullable=False, default=datetime.utcnow)
-    rating = db.Column(db.Integer, nullable=False)
-    safety = db.Column(db.Boolean, nullable=False, default=None)
+    dive_day = db.Column(db.Integer, nullable=True)
+    dive_date = db.Column(db.Date, nullable=True)
+    dive_time = db.Column(db.Time, nullable=True, default=datetime.utcnow)
+    rating = db.Column(db.Integer, nullable=True)
+    safety = db.Column(db.Boolean, nullable=True, default=None)
     items = db.Column(db.String(250), nullable=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"), nullable=False)
     site_id = db.Column(db.Integer, db.ForeignKey("sites.site_id"), nullable=False)
