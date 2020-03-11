@@ -1,8 +1,41 @@
 {% extends "base.html" %}
 
+
+{% block script %}
+<style>
+	#map-canvas {
+		height: 60%;  
+		width: 70%;  }
+</style>
+
+
+{% endblock %}
+
 {% block content %}
-    <h1>Qui Glane</h1>
-
-
+<div class="container">
+<h1>Qui Glane</h1>
+	
+	<div id="map-canvas"></div>
+	<script>
+		// Initialize and add the map
+		function initMap() {
+		// The location of NY
+		var ny = {lat: -40.7128, lng: 74.006};
+		// The map, centered at NY
+		var map = new google.maps.Map(
+				document.getElementById('map'), {zoom: 4, center: ny});
+		
+		// var marker = new google.maps.Marker({position: uluru, map: map});
+	}
+	</script>
+	 <!--Load the API from the specified URL
+    * The async attribute allows the browser to render the page while the API loads
+    * The key parameter will contain your own API key (which is not needed for this tutorial)
+    * The callback parameter executes the initMap() function
+    -->
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDrZ2ved3Lc_SwylfGH3FxASdTJGhaUA3Mcallback=initMap">
+    </script>
+</div>	
 {% endblock %}
 

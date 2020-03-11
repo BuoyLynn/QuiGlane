@@ -1,35 +1,24 @@
 import datetime
 from sqlalchemy import func
-import nltk
-from nltk.tokenize import word_tokenize
-from nltk.corpus import stopwords
+# import nltk
+# from nltk.tokenize import word_tokenize
+# from nltk.corpus import stopwords
 from model import Site, Dive, connect_to_db, db
 from server import app
 
-def load_site(dirty_directory):
-    """Load location name and pseudo address (not lat/long), give it a site_id"""
+def load_db(dirty_directory):
+    """populate sites with name and pseudo address (not lat/long), give it a site_id"""
 
-    for i, row in enumerate(open(dirty_directory)):
-        row = row.rstrip()
-        site_name, address, parse_detail = row.split('.', 2)
-
-        token_detail = word_tokenize(parse_detail)
-        
-
-
-        site = Site(site_name = site_name,
-                    address = address)
-
-        db.session.add(site)
-
-        # counter to see progress.
-        if i % 20 == 0:
-            print(id)
-        
-    db.session.commit()
+    with open(dirty_directory) as data:
+        for row in data:
+            site_name, address, parse_detail = row.rstrip().split('.', 2)
+            site = Site(site_name = site_name,
+                        address = address + ' NY')
+            
+            db.session.add(site)        
+        db.session.commit()
 
 
-    
 
 
 """
@@ -59,7 +48,6 @@ All entries will be associated with user (foreignkey) #1 freegan.org. precreated
 if __name__ == "__main__":
     connect_to_db(app)
     db.create_all()
-
-    dirty_directory = "fregan_dir_clean.txt"
-    load_reviews(rating_filename)
-   
+    
+    dirty_directory = "seed_data/freegan_dir_clean.txt"
+    load_db(dirty_directory)

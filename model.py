@@ -35,11 +35,14 @@ class Site(db.Model):
     site_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     # business name (ex. Whole Foods)
     site_name = db.Column(db.String(150), nullable=False)
-    # type of business (ex. grocery, bakery, etc.)
-    category = db.Column(db.String(100), nullable=True)
     address = db.Column(db.String(150), nullable=True)
+    # google place_id from site_name & address request
+    place_id = db.Column(db.String(150), nullable=True)
+    # google request place_id and populate lat & long
     latitude = db.Column(db.Float, nullable=True)
     longitude = db.Column(db.Float, nullable=True)
+    # type of business (ex. grocery, bakery, etc.)
+    category = db.Column(db.String(100), nullable=True)
     open_time = db.Column(db.DateTime, nullable=True)
     close_time = db.Column(db.DateTime, nullable=True)
     dive = db.relationship("Dive", backref='site', lazy=True)
