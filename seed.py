@@ -45,8 +45,35 @@ def add_site_place_id():
             place_id = place_api_returns['candidates'][0]['place_id']
         site.place_id = place_id
         db.session.commit()
+    
+def add_site_details():
+    """Request GOOGLE PLACES API using site.places_id (from add_site_place_id())"""
+    
+    # Loop site(obj) db.Site
+    for site in Site.query.all():
+        # feed API param place_id dynamically:
+        params = {
+                  'key': os.getenv("GOOGKEY"),
+                  'place_id': site.place_id,
+                 }
+        # Run GOOG PLACES API requests for place details      
+        GOOG_PLACES_API = 'https://maps.googleapis.com/maps/api/place/details/json'
+        r = requests.get(GOOG_PLACES_API, params = params)
+        site_details = r.json()
+
+        with open('site_details.json', 'w') as site_details_json:
+            json.dump(site_details_json, r)
+
+        # Weed out failed search. and grab details
+        if site_details['status'] == 'OK':
+            lat = site_details['result']['geometry']['location']['lat']
+            lng = site_details['result']['geometry']['location']['lng']
 
 
+        site.latitude = lat
+        site.longitude = lng
+        # site.category = 
+        db.session.commit()
 
 
 
