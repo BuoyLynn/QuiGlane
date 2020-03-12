@@ -1,6 +1,12 @@
 from bs4 import BeautifulSoup
 import requests
 
+
+#############################################
+# THIS IS A ONE-HIT-WONDER SCRAPE SPECIFICLLY 
+# USED TO SCRAPE FREEGAN.ORG DIRECTORY.
+#############################################
+
 # Request HTML from URL & Return as HTML Text to parse
 response = requests.get("https://freegan.info/freegan-directories/dumpster-directory/manhattan/")
 soup = BeautifulSoup(response.text, "html.parser")
@@ -32,6 +38,7 @@ for store in ptags:
 
 list_directory = [string.replace('\n', '') for string in list_directory]
 
+# crate seed_data txt file.
 new_txt = open('freegan_dir_clean.txt','w')
 for string in list_directory:
     new_txt.write(string)

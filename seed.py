@@ -1,10 +1,16 @@
+import os
+import json
 import datetime
+import requests
 from sqlalchemy import func
 # import nltk
 # from nltk.tokenize import word_tokenize
 # from nltk.corpus import stopwords
-from model import Site, Dive, connect_to_db, db
-from server import app
+from flask_sqlalchemy import SQLAlchemy
+
+
+db = SQLAlchemy()
+
 
 def load_db(dirty_directory):
     """populate sites with name and pseudo address (not lat/long), give it a site_id"""
@@ -14,16 +20,42 @@ def load_db(dirty_directory):
             site_name, address, parse_detail = row.rstrip().split('.', 2)
             site = Site(site_name = site_name,
                         address = address + ' NY')
-            
+            # load parse_detail to dive
             db.session.add(site)        
         db.session.commit()
+
+
+def add_site_place_id():
+    """Query table 'sites' as GOOG Places API requests param input"""
+    
+    # Loop through row (obj) in db.Site
+    for site in Site.query.all():
+        # feed API param input string dynamically:
+        params = {
+                  'key': os.getenv("GOOGKEY"),
+                  'input': site.site_name + site.address,
+                  'inputtype': 'textquery',
+                }
+        # Run GOOG PLACES API requests (returns places_id only.)        
+        GOOG_PLACES_API = 'https://maps.googleapis.com/maps/api/place/findplacefromtext/json'
+        r = requests.get(GOOG_PLACES_API, params = params)
+        place_api_returns = r.json()
+        # Weed out failed search.
+        if place_api_returns['status'] == 'OK':
+            place_id = place_api_returns['candidates'][0]['place_id']
+        site.place_id = place_id
+        db.session.commit()
+
 
 
 
 
 """
 TO DO:
+March 11
+Load db table dives with the parse_detail with corresponding site and user_id (freegan)
 
+March 8
 open(freegan_dir_clean.txt)
 loop through
 each line represents a business:
@@ -46,8 +78,11 @@ All entries will be associated with user (foreignkey) #1 freegan.org. precreated
 
 
 if __name__ == "__main__":
+    from server import app
+    from model import User, Site, Dive, connect_to_db, db
+
     connect_to_db(app)
     db.create_all()
     
     dirty_directory = "seed_data/freegan_dir_clean.txt"
-    load_db(dirty_directory)
+    # load_db(dirty_directory)

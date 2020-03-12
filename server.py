@@ -1,7 +1,7 @@
+import os
 from jinja2 import StrictUndefined
 from flask import Flask, render_template, redirect, url_for, flash, request
 from flask_debugtoolbar import DebugToolbarExtension
-# from flask_mongoengine import MongoEngine, MongoEngineSessionInterface
 from model import User, Site, Dive, connect_to_db, db
 from forms import Register, Login, Review
 from flask_login import LoginManager, login_user, current_user, logout_user, login_required
@@ -9,7 +9,7 @@ from flask_bcrypt import Bcrypt
 
 app = Flask(__name__)
 
-app.config["SECRET_KEY"] = "quiglane"
+app.config["SECRET_KEY"] = os.getenv("appkey")
 app.jinja_env.undefined = StrictUndefined
 bcrypt = Bcrypt(app)
 login = LoginManager(app)
@@ -76,18 +76,25 @@ def register():
 #     form = Review()
 #     if form.validate_on_submit():
        
-#        dive = Review(dive_day=form.dive_day.data, dive_date=form.dive_date.data, dive_time=form.dive_time.data, rating=form.rating.data, safety=form.safety.data, items=form.items.data)
+#        dive = Review(dive_day=form.dive_day.data, 
+#                       dive_date=form.dive_date.data, 
+#                       dive_time=form.dive_time.data, 
+#                       rating=form.rating.data, 
+#                       safety=form.safety.data, 
+#                       items=form.items.data)
 
 #        db.session.add(dive)
 #        db.session.commit
 #        flash("Dive added.")
 #        return redirect(url_for("home"))
+    # pass
     
 
 
 # @app.route("/profile/<int: user_name>", methods=("POST"))
 # @login_required
 # def profile():
+# Query user x user dive.
 #     pass
 
 

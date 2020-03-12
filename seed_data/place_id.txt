@@ -1,0 +1,157 @@
+{'candidates': [{'place_id': 'ChIJc3OdIB70wokRjGOkk5DDcYk'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJywU5Rpz2wokRrCT1IXstAz4'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJx5-q0D72wokR-98xbWUpdMY'}, {'place_id': 'ChIJSxyuyaJYwokRnrldro_G1Ps'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJQ6apwpxYwokR4NV1UcGbRSk'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJLW3vMzv2wokRGt6nI1lYw8A'}], 'status': 'OK'}
+{'candidates': [], 'status': 'ZERO_RESULTS'}
+{'candidates': [{'place_id': 'ChIJp4c-5ST2wokRkDYPn0YRTXQ'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJT--_7INYwokR-rVLUYxu9v4'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJT--_7INYwokR-rVLUYxu9v4'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJu3GdsiX2wokRudmQBbOBe4Q'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJYdK_Iib2wokRvWRV9bpAvpo'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJuwuPuoNYwokR_AOZa5I-UKI'}], 'status': 'OK'}
+{'candidates': [], 'status': 'ZERO_RESULTS'}
+{'candidates': [], 'status': 'ZERO_RESULTS'}
+{'candidates': [{'place_id': 'ChIJYxQ8G1ZYwokRq3vwq3Ra36U'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJ97anZ4ZYwokRHiYU2bhIFP4'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJmddBBl5YwokRl0eO4zxcsPo'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJwRoX111YwokRxinCkjQJP8w'}], 'status': 'OK'}
+{'candidates': [], 'status': 'ZERO_RESULTS'}
+{'candidates': [{'place_id': 'ChIJpTrUcKVYwokRAWFvay1gEvs'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJAZdmir5YwokRuju1AfnLywg'}, {'place_id': 'ChIJfb0p1q9YwokRDUDDFmRWl18'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJr0lrNZZYwokR5VFYtta0Lvk'}, {'place_id': 'ChIJeecsPYNYwokRCEKpoTCNtRY'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJCX_eXqNYwokR6szaGZpwoNk'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJ6Qr7pbpYwokRqQzVVF7VNhk'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJ2x9X5b1ZwokRcpKXJFMeUFU'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJeQV-K-pYwokRg-MRkkwTfaI'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJG_RIl7BYwokRVc9xhezUFe8'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJS7WvVbpYwokRLwaOTl4YhJU'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJoeEGt79YwokRhpMIg4Gcjmc'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJgbyS58FYwokRxCDBr6ZzGwQ'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJAZdmir5YwokRuju1AfnLywg'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJfSVhorlYwokR2k8O3TLihco'}, {'place_id': 'ChIJGelVbLlYwokRMLavIcPFnus'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJEfwHf8BYwokRzpIRFgb_rxk'}, {'place_id': 'ChIJl0rtoARZwokR_gup7UNdhTY'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJeQV-K-pYwokRg-MRkkwTfaI'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJD-XpiupYwokRf4iMusF6h3g'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJgbyS58FYwokRU4Q8rssYjrw'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJq7svWuhYwokRb2AnXAcp4ho'}, {'place_id': 'ChIJq7svWuhYwokR1Ozfxuk8spI'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJabm8wlhYwokRGwnWxb9HbtY'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJlTWmZvdYwokROyEKYwbPEwo'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJed6ybPhYwokR4-I52hcwM6k'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJ-dW2jFdYwokRvlPWp_0GR28'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJq7fgk1dYwokRKt-Hp_O90xo'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJgYq_8ldYwokRu_m3nJZGTNU'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJuWO59FZYwokRDbvnB6y8iBg'}], 'status': 'OK'}
+{'candidates': [], 'status': 'ZERO_RESULTS'}
+{'candidates': [{'place_id': 'ChIJR9legAFZwokRufD9bcpVIfk'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJq_fSEwBZwokREWF5h7NjWu4'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJrQYljPlYwokRVqQGXxbHaCo'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJrThdq61ZwokRhxT2n92UL1k'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJlXfc2lRYwokRTsv0eRGskCo'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJ7YSZ0v5YwokRZKZ_2qwM_HU'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJufotpVRYwokRCGPp8vGFYrU'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJE1liW6tZwokRxxmy1Lz8Gd0'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJBx80rq1ZwokR8vpGL88TmxA'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJlfo1GKxZwokROYJH-y9OVQY'}, {'place_id': 'ChIJYxQ8G1ZYwokRv-1GWwez7tA'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJNZWUaOFYwokRPeRdkNZz7tI'}, {'place_id': 'ChIJa_pcDRVZwokRr7s1g2oSjRY'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJk0wAz4Qm9ocRUZNJ86m_iWc'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJI-1y2fpYwokRQrelf6Wbt80'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJ3-FMJgtZwokRRNr94DCaNYA'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJgbyS58FYwokRU4Q8rssYjrw'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJNZWUaOFYwokRPeRdkNZz7tI'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJiSN89-JYwokRCFETXaHAjDs'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJtyL4beJYwokRztSnmXW0wV0'}], 'status': 'OK'}
+{'candidates': [], 'status': 'ZERO_RESULTS'}
+{'candidates': [{'place_id': 'ChIJtUaeYFFYwokR691nhqI4b1k'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJD8meuVJYwokR--2BNsYoquE'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJOYV1ZFFYwokR8-HpaoGd4Iw'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJlafJgrJZwokRR9jsxr3-Pu0'}, {'place_id': 'ChIJR55jE1dYwokRPhDF0BnWUAo'}], 'status': 'OK'}
+{'candidates': [], 'status': 'ZERO_RESULTS'}
+{'candidates': [{'place_id': 'ChIJbQmR8QJZwokRMY4AoaKPPhg'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJjfyhIgRZwokRLLSv_EmfZVQ'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJr1kuTSlZwokRHyV10OKJ8jw'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJFfgorQZZwokRjOY9K60Volo'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJzT6g9gBZwokRXCp_-VjhYMk'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJT2dMSwZZwokRUFL7XzUQKSY'}, {'place_id': 'ChIJx6sMka9ZwokRC44J8Z6IZqU'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJ67xKJptZwokRRzPgzWUWt-0'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJNYsUfLBZwokRZFy4KU8TLgA'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJw_nz8LlZwokRmqV8XDTlEXk'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJ009fxrtZwokRil2jg6rDi2c'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJw94eyZdZwokRIFFh8Jtcoa8'}, {'place_id': 'ChIJHRSfs7tZwokRYw6atlv6ado'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJy-spMrtZwokRVJDDFzlH_Nk'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJiag-Wq5ZwokR9x2Wlf7j7dc'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJgYq_8ldYwokRu_m3nJZGTNU'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJN56iW7xZwokRe09Gad_4ZP4'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJN56iW7xZwokRe09Gad_4ZP4'}, {'place_id': 'ChIJt8W7n79ZwokRS9hzM5Gpddk'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJkStAWL9ZwokRPghmxpn_DfY'}, {'place_id': 'ChIJOXl5WL9ZwokRZ1ZAPa-PWgQ'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJp6AneL9ZwokRPd5UojufmsI'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJSxJS4HlZwokR1RIP2fu3yH4'}, {'place_id': 'ChIJOZ9kwHVZwokRGZwtSrIw9K4'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJ_Z-t-7pZwokR750dIIRlvxc'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJwe6p26NZwokRGCoalZZVi3k'}, {'place_id': 'ChIJA6WB3KNZwokR_KvYV5qmK_M'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJdTqNzU70wokR6dXmVtuC82U'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJ9wsQc59ZwokR7nCJb2bVrOM'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJu9eNKXVZwokRgEkE_Wk7F2k'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJEQZoQqBZwokR3bD6PdDMsZs'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJHRjkvaBZwokR-WeDIrpShro'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJlZFg95hZwokRzTo2UWdo0Lg'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJa5oiKJ9ZwokR4EX7HlQSstY'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJh0m7aJhZwokRDWI6VdV0BqM'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJrb33EqJZwokRxcSw3DeyRK8'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJ6ellkb1ZwokRBQGj7E_q-BI'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJWcn-xphZwokRkgzEVYhd7Ek'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJq7H0v5ZZwokRAo8N9Dj0pkI'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJ5U3z65ZZwokRntjySncc3Tg'}], 'status': 'OK'}
+{'candidates': [], 'status': 'ZERO_RESULTS'}
+{'candidates': [], 'status': 'ZERO_RESULTS'}
+{'candidates': [{'place_id': 'ChIJjZbR1pZZwokRE86lopvZ6lI'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJJ9mOEL5ZwokROZ4fZ3sX7Aw'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJZyVQJONYwokREKv0a1J7bFI'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJValK9JJZwokRuWsMUxsoE-E'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJL_Qw6JlZwokR3s_7XE0J73c'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJdffD75lZwokR_n3cJkw6kF4'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJpQ_bA5pZwokR8d0QzoqvBcQ'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJxSvNNFNYwokRjPXU7mmD8Nc'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJoeEGt79YwokRw6mNe7339kw'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJaf5B8Y9ZwokR3C2a3J6g8Ws'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJczPtUehYwokRuDD8uX4_MzA'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJ56GeZAT2wokRF5uC0nJu4OM'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJ25vWvZ1ZwokR7lmQyY4lIeY'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJeUZfqrNZwokRKabmNWtpQGo'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJeQisO8JYwokR5RJ95csAF7M'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJW1phM5tZwokRyQokW1nFYF0'}, {'place_id': 'ChIJXanCVoNZwokR6xtRDQ_vDiU'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJnb-2q3NZwokRXvfkFCdixkw'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJ76ikKJ1ZwokRO3E7Lguk32U'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJW1phM5tZwokRyQokW1nFYF0'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJ1XnUOINZwokR2uREnJO4648'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJaxvWroVZwokReqjdeMaSIF4'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJZZK744tZwokRl_mXIy4F7KI'}, {'place_id': 'ChIJE04wjCBawokRgugDZrTSxGU'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJMUSzDfLswokRApM4wGafxQc'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJSaRjC49ZwokR402Rpxj6i9Q'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJ7_c8yY5ZwokRKIArrMkYHmk'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJLULRqiX2wokRFBX2XJvh6Tw'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJ_8ynBYtZwokRHKQZ_0S_G9s'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJ_8ynBYtZwokRHKQZ_0S_G9s'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJQ5yUr4VZwokRbMN-yaOarmc'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJ--fMxYdZwokRQ0s9rp9SE68'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJOwg_06VPwokRYv534QaPC8g'}, {'place_id': 'ChIJGWnG6YNZwokRAX4XhFsNa8Q'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJ7fydz4BZwokRl6FuOJM5QPU'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJNdebOIFZwokR0JEfqeQONrQ'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJC1jcGYhZwokRZlUxRxrMBjg'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJe12LcydawokRzJ4oOyWqxaQ'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJG1hl9R5awokRfKm_kGnTeck'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJCaSYmv1YwokRlKU5kY6y9NI'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJU0lt1x5awokRcd1w1u4Ju9Q'}], 'status': 'OK'}
+{'candidates': [], 'status': 'ZERO_RESULTS'}
+{'candidates': [], 'status': 'ZERO_RESULTS'}
+{'candidates': [{'place_id': 'ChIJ83wVzBdawokRXvY-oaCsp1I'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJu9WWrBdawokRHjhCvvGGGY4'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJ_2plXD1awokRGHC_fgD3uWE'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJY9_JghxawokRfEOEqaCgqNs'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJLUmujRpawokR3UcxkapDrNU'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJvR3fnRpawokRfJ7Gw7YUptM'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJJajnDBBawokRzIZCmBm_8Bw'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJwex6LhBawokRNxYgjxnVA_g'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJrXMQ4v5YwokRNKtohalGqO0'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJH_8SKRZawokR6B2HDVBpDZ8'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJbR_XgT1awokRkaDripRk7Ns'}], 'status': 'OK'}
+{'candidates': [{'place_id': 'ChIJ-SZWTBZawokRhWsBXzCdh-8'}], 'status': 'OK'}
