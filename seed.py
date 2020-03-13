@@ -75,24 +75,23 @@ def add_site_details():
             if 'types' in site_details['result']:
                 category = site_details['result']['types']    
             
-            # check if opening_hours exist
+            # check if opening_hours exist in json
             if 'opening_hours' in site_details['result']:
-                # if exists, check if closing hour exists:
+                
+                open_t = site_details['result']['opening_hours']['periods'][0]['open']['time']
+                # check if closing hour exists:
+                # if no close time, 24h open business. Set close time to "0000"
                 if 'close' in site_details['result']['opening_hours']['periods'][0]:
-                    open_time = site_details['result']['opening_hours']['periods'][1]['open']['time']
-                    close_time = site_details['result']['opening_hours']['periods'][1]['close']['time']  
-                    
-                else: 
-                    open_time = site_details['result']['opening_hours']['periods'][0]['open']['time']
-                    close_time = open_time
-      
+                    close_t = site_details['result']['opening_hours']['periods'][0]['close']['time']                   
+                else:
+                    close_t = open_t  
             
-            # add to db.Site columns open_time & close_time
-            site.latitude = lat
-            site.longitude = lng
-            site.category = category
-            site.open_time = time(hour=int(open_time[0:2]), minute=int(open_time[2:4]))
-            site.close_time = time(hour=int(close_time[0:2]), minute=int(close_time[2:4]))
+        # add to db.Site columns open_time & close_time
+        site.latitude = lat
+        site.longitude = lng
+        site.category = category[0][0:6]
+        site.open_time = time(hour=int(open_t[0:2]), minute=int(open_t[2:4]))
+        site.close_time = time(hour=int(close_t[0:2]), minute=int(close_t[2:4]))
 
         db.session.commit()
 
