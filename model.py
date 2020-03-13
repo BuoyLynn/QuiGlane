@@ -43,8 +43,8 @@ class Site(db.Model):
     longitude = db.Column(db.Float, nullable=True)
     # type of business (ex. grocery, bakery, etc.)
     category = db.Column(db.String(100), nullable=True)
-    open_time = db.Column(db.DateTime, nullable=True)
-    close_time = db.Column(db.DateTime, nullable=True)
+    open_time = db.Column(db.Time, nullable=True)
+    close_time = db.Column(db.Time, nullable=True)
     dive = db.relationship("Dive", backref='site', lazy=True)
 
     def __repr__(self):

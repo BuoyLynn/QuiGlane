@@ -1,3 +1,4 @@
+from datetime import datetime, date, time
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, SelectField, DateField, TimeField, RadioField
 from wtforms.validators import DataRequired, Optional, Length, Email, EqualTo, ValidationError
@@ -40,7 +41,7 @@ class Login(FlaskForm):
 class Review(FlaskForm):
     """Dive Review"""
 
-    dive_name = StringField('Dumpster Business', validators=[DataRequired(), Length(max=200)])
+    dive_name = StringField('Dumpster Owner (Business Name)', validators=[DataRequired(), Length(max=200)])
     dive_address = StringField('Address', validators=[Optional()])
     dive_day = SelectField('Dive Day', validators=[DataRequired()],
                             choices=[('Sunday', 0),
@@ -51,7 +52,7 @@ class Review(FlaskForm):
                                      ('Friday', 5), 
                                      ('Saturday', 6)])
     dive_date = DateField('Dive Date', validators=[Optional()], format='%m/%d/%Y')
-    dive_time = TimeField('Dive Time', validators=[DataRequired()])
+    dive_time = TimeField('Dive Time', default=datetime.now(), validators=[DataRequired()])
     rating = RadioField('Dive Rating', default=3, validators=[DataRequired()],
                         choices=[(0, 'Worst'),
                                  (1, 'Bad'),

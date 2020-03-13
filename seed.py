@@ -7,12 +7,13 @@ from sqlalchemy import func
 # from nltk.tokenize import word_tokenize
 # from nltk.corpus import stopwords
 from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime, date, time
 
 
 db = SQLAlchemy()
 
 
-def load_db(dirty_directory):
+def load_site_basic(dirty_directory):
     """populate sites with name and pseudo address (not lat/long), give it a site_id"""
 
     with open(dirty_directory) as data:
@@ -23,7 +24,7 @@ def load_db(dirty_directory):
             # load parse_detail to dive
             db.session.add(site)        
         db.session.commit()
-
+            
 
 def add_site_place_id():
     """Query table 'sites' as GOOG Places API requests param input"""
@@ -46,6 +47,7 @@ def add_site_place_id():
         site.place_id = place_id
         db.session.commit()
     
+
 def add_site_details():
     """Request GOOGLE PLACES API using site.places_id (from add_site_place_id())"""
     
@@ -62,17 +64,36 @@ def add_site_details():
         site_details = r.json()
 
         with open('site_details.json', 'w') as site_details_json:
-            json.dump(site_details_json, r)
+            json.dump(site_details, site_details_json)
 
         # Weed out failed search. and grab details
         if site_details['status'] == 'OK':
             lat = site_details['result']['geometry']['location']['lat']
             lng = site_details['result']['geometry']['location']['lng']
+            
+            # check if category exits, if so, get category.
+            if 'types' in site_details['result']:
+                category = site_details['result']['types']    
+            
+            # check if opening_hours exist
+            if 'opening_hours' in site_details['result']:
+                # if exists, check if closing hour exists:
+                if 'close' in site_details['result']['opening_hours']['periods'][0]:
+                    open_time = site_details['result']['opening_hours']['periods'][1]['open']['time']
+                    close_time = site_details['result']['opening_hours']['periods'][1]['close']['time']  
+                    
+                else: 
+                    open_time = site_details['result']['opening_hours']['periods'][0]['open']['time']
+                    close_time = open_time
+      
+            
+            # add to db.Site columns open_time & close_time
+            site.latitude = lat
+            site.longitude = lng
+            site.category = category
+            site.open_time = time(hour=int(open_time[0:2]), minute=int(open_time[2:4]))
+            site.close_time = time(hour=int(close_time[0:2]), minute=int(close_time[2:4]))
 
-
-        site.latitude = lat
-        site.longitude = lng
-        # site.category = 
         db.session.commit()
 
 
@@ -112,4 +133,4 @@ if __name__ == "__main__":
     db.create_all()
     
     dirty_directory = "seed_data/freegan_dir_clean.txt"
-    # load_db(dirty_directory)
+    # load_site_basic(dirty_directory)
