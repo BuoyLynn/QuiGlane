@@ -24,8 +24,10 @@ def load_user(user_id):
 
 @app.route("/")
 def home():
-    #show a list of dive sites (dict) to be mapped.
-    return render_template("home.html", title="Welcome!")
+    marker = Site.query.all()
+          
+    return render_template("home.html", title="Welcome!",
+                                        marker=marker)
 
 
 @app.route("/login", methods=["GET", "POST"])

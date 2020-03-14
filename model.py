@@ -1,13 +1,11 @@
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime, date, time
-from flask_login import UserMixin, LoginManager
 
 
 db = SQLAlchemy()
 
 
-
-class User(UserMixin, db.Model):
+class User(db.Model):
 # class User(db.Model):
     """User of QuiGlane"""
 
@@ -49,7 +47,9 @@ class Site(db.Model):
 
     def __repr__(self):
 
-        return f"<Site={self.site_name} ID={self.site_id}>"
+        return f"""<{self.site_id}: {self.site_name} 
+                    Lat={self.latitude} Lng={self.latitude}
+                    Cat={self.category[0:2]}>"""
 
 class Dive(db.Model):
     """Dive Ratings and Review"""
