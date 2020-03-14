@@ -24,19 +24,13 @@ def load_user(user_id):
 
 @app.route("/")
 def home():
-    marker = Site.query.all()
-          
+    marker = Site.query.all()          
     return render_template("home.html", title="Welcome!",
                                         marker=marker)
 
-
 @app.route("/login", methods=["GET", "POST"])
 def login():
-    """ 
-    Get: Land Login page.
-    POST: If form is valid, redirect user to the logged-homepage.
-    """
-    
+  
     if current_user.is_authenticated:
         flash(f"Ready to dive {form.user_name.data}?", "success")
         return redirect(url_for("home"))
@@ -104,9 +98,9 @@ def register():
 
 if __name__ == "__main__":
 
-    app.debug = True
-    
+    app.debug = True    
     app.jinja_env.auto_reload = app.debug
+    app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
     
     connect_to_db(app)
 

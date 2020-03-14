@@ -2,17 +2,24 @@
 
 
 {% block script %}
-<style>
-	#map-canvas {
-		height: 60%;  
-		width: 70%;  }
-</style>
-
+<script src="/static/js/googMaps.js"></script>
 
 {% endblock %}
 
 {% block content %}
 <h1>Qui Glane</h1>
+
+<div class="text-muted">
+	<p>Start saving your dives!
+		<a class="redirect-login" href="{{ url_for('login') }}">login.</a>
+	</p>
+	<p><small>Don't have an account? Register  
+		<a class="redirect-login" href="{{ url_for('register') }}">here.</a>
+	</small></p>
+</div>
+
+<!--The div element for the map -->
+<div id="map"></div>
 
 <h2>Here's a list of dive sites that will go on the map</h2>
 	<table style="width: 100%">
@@ -34,9 +41,11 @@
 		
 	</table>
 	
-
-	
-	
 </div>	
+
+<script
+	async defer
+	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCIBgb9SX9aB2XPJqB8yDSlggvmZfpy7To&callback=initMap">
+</script>
 {% endblock %}
 
