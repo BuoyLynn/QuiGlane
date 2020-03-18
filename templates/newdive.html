@@ -2,88 +2,13 @@
 
 {% block content %}
 	<div>
-	<form action="/add-dive/<int: user_id>", method="GET"> 
+	<form action="/add-dive/new", method="GET"> 
 		
 		<fieldset class="form">
 			
-			<legend>Tell us more about your dive.</legend>
+			<legend>Buid your glean profile by adding your dives!</legend>
 			
-			<div class="form">
-				{{ form.dive_day.label }}
-					
-				{% if form.user_name.errors %}
-				<div class="input-error">
-					{% for error in form.user_name.errors %}
-						<span class="error-message" style="color:red; font-size: small">
-						{{ error }}
-						</span>
-					{% endfor %}
-					</div>
-				{% else %}
-					{{ form.user_name }}
-				{% endif %}
-				</div>
-				
-			<div class="form">
-				{{ form.email.label }}
-
-				{% if form.email.errors %}
-				<div class="input-error">
-					{% for error in form.email.errors %}
-						<span class="error-message" style="color:red; font-size: small">
-						{{ error }}
-						</span>
-					{% endfor %}
-					</div>
-				{% else %}
-					{{ form.email }}
-				{% endif %}
-				</div>
-
-			<div class="form">
-				{{ form.password.label }}
-				
-				{% if form.password.errors %}
-				<div class="input-error">
-					{% for error in form.password.errors %}
-						<span class="error-message" style="color:red; font-size: small">
-						{{ error }}
-						</span>
-					{% endfor %}
-					</div>
-				{% else %}
-					{{ form.password }}
-				{% endif %}
-				</div>
-
-			<div class="form">
-				{{ form.confirm_password.label }}
-				
-				{% if form.confirm_password.errors %}
-				<div class="input-error">
-					{% for error in form.confirm_password.errors %}
-						<span class="error-message" style="color:red; font-size: small">
-						{{ error }}
-						</span>
-					{% endfor %}
-					</div>
-				{% else %}
-					{{ form.confirm_password }}
-				{% endif %}
-				</div>
-
-		</fieldset>
-
-		<div class="form">
-			{{ form.submit(class="btn btn-dark btn-sm") }}
-		</div>
-	
-	</form>
-	</div>
-	<div class="text-muted">
-		<p><small>Already a gleaner? 
-			<a class="redirect-login" href="{{ url_for('login') }}">Login</a>
-		</small></p>
+		
 	</div>
 
     

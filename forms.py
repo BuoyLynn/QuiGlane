@@ -1,8 +1,9 @@
 from datetime import datetime, date, time
 from flask_wtf import FlaskForm
+from flask_login import current_user
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, SelectField, DateField, TimeField, RadioField
 from wtforms.validators import DataRequired, Optional, Length, Email, EqualTo, ValidationError
-from model import User
+from model import User, Site, Dive
 
 
 class Register(FlaskForm):
@@ -18,7 +19,7 @@ class Register(FlaskForm):
     twitter = StringField('Twitter', validators=[Optional()])
 
     submit = SubmitField('Join')
-
+   
     def check_username(self, user_name):
         user = User.query.filter_by(user_name=user_name.data).first()
         if user:

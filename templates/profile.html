@@ -1,4 +1,21 @@
 {% extends "layout.html" %}
 {% block content %}
-   <!-- Add Username, email, twitter and loop dive reviews -->
+   <!-- create card for each dive using bootstrap -->
+   <div>
+      <h2 class="profile-header">{{ current_user.user_name }}</h2>
+      <p class="profile-email">{{ current_user.email }}</p>
+              
+      {% for dive in dives %}
+      
+         <h3>{{ dive.site.site_name }}</h3>
+         <h4>{{ dive.site.site_address }}</h4>
+         <p><small>{{ dive.site.category }}</small></p>
+         <p id="dive-datetime">Dive Day: {{ dive.dive_day }}
+            Time: {{ dive.dive_time }}
+         </p>
+         <p id="dive-rating">Rating: {{ dive.rating }}</p>
+         <p id="dive-safety">Safety: {{ dive.safety }}</p>
+         <p id="dive-detail">Other Details: {{ dive.items }}</p>
+
+   </div>
 {% endblock content %}

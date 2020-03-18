@@ -1,11 +1,11 @@
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime, date, time
-
+from flask_login import UserMixin
+# from server import login_manager
 
 db = SQLAlchemy()
 
-
-class User(db.Model):
+class User(db.Model, UserMixin):
 # class User(db.Model):
     """User of QuiGlane"""
 
@@ -18,6 +18,9 @@ class User(db.Model):
     password = db.Column(db.String(64), nullable=False)
     # twitter = db.Column(db.String(15), nullable=True)
     dive = db.relationship("Dive", backref='user', lazy=True)
+
+    def get_id(self):
+        return(self.user_id)
          
     
     def __repr__(self):
@@ -62,7 +65,7 @@ class Dive(db.Model):
     dive_time = db.Column(db.Time, nullable=True, default=datetime.utcnow)
     rating = db.Column(db.Integer, nullable=True)
     safety = db.Column(db.Boolean, nullable=True, default=None)
-    items = db.Column(db.String(250), nullable=True)
+    items = db.Column(db.String(350), nullable=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"), nullable=False)
     site_id = db.Column(db.Integer, db.ForeignKey("sites.site_id"), nullable=False)
 
@@ -76,19 +79,17 @@ class Dive(db.Model):
 # Connect db to app (server.py)
 
 def connect_to_db(app):
-    """Connect the database to our Flask app."""
-
-    # Configure to use our PstgreSQL database
+    """Connect the database to app."""
+    
     app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///glean'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     db.app = app
     db.init_app(app)
-    # login.init_app(app)
-
-
+  
 if __name__ == "__main__":
     
-    from server import app, login
+    from server import app, login_manager
+    
     connect_to_db(app)
     print("Connected to DB.") # To test in interactive mode
 
