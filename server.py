@@ -1,11 +1,11 @@
 import os
 from jinja2 import StrictUndefined
-from flask import Flask, render_template, redirect, url_for, flash, request
+from flask import Flask, render_template, redirect, url_for, flash, request, jsonify
 from flask_debugtoolbar import DebugToolbarExtension
 from forms import Register, Login, Review
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager, login_user, current_user, logout_user, login_required
-from model import User, Site, Dive, connect_to_db, db
+from model import User, Site, Dive, connect_to_db, db, datetime
 
 app = Flask(__name__)
 
@@ -25,6 +25,39 @@ def home():
     marker = Site.query.all()          
     return render_template("home.html", title="Welcome!",
                                         marker=marker)
+
+@app.route('/api/sites-info')
+def site_info():
+    sites_dives = db.session.query(Site, Dive).outerjoin(Dive).all()
+    make_info_json = []
+    for site, dive in sites_dives:
+        # convert all time to string to jasonify
+        if dive.dive_time is not None: # otherwise will through error, nonetype cannot be strftime
+            dive.dive_time = dive.dive_time.strftime('%H%M')
+        else:
+            pass
+        if site.open_time != None or site.close_time != None:
+            site.open_time = site.open_time.strftime('%H%M')
+            site.close_time = site.close_time.strftime('%H%M')
+        else:
+            pass
+            
+        site_info = {'lat': site.latitude, 
+                       'lng': site.longitude,
+                       'address': site.address,
+                       'category': site.category,
+                       'open': site.open_time,
+                       'close': site.close_time,
+                       'dive_day': dive.dive_day,
+                       'dive_time': dive.dive_time,
+                       'rating': dive.rating,
+                       'safety': dive.safety,
+                       'details': dive.items                
+                    }
+        make_info_json.append(site_info)
+        
+    return jsonify({'sites-info': make_info_json})
+
 
 @app.route("/login", methods=["GET", "POST"])
 def login():  
