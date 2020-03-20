@@ -44,6 +44,7 @@ def site_info():
             
         site_info = {'lat': site.latitude, 
                        'lng': site.longitude,
+                       'business': site.site_name,
                        'address': site.address,
                        'category': site.category,
                        'open': site.open_time,
@@ -55,8 +56,9 @@ def site_info():
                        'details': dive.items                
                     }
         make_info_json.append(site_info)
-        
-    return jsonify({'sites-info': make_info_json})
+        # sites_info = json.dumps(make_info_json)
+    # return sites_info
+    return jsonify(make_info_json)
 
 
 @app.route("/login", methods=["GET", "POST"])
