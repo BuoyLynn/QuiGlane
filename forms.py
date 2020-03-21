@@ -45,16 +45,16 @@ class Review(FlaskForm):
     dive_name = StringField('Dumpster Owner (Business Name)', validators=[DataRequired(), Length(max=200)])
     dive_address = StringField('Address', validators=[Optional()])
     dive_day = SelectField('Dive Day', validators=[DataRequired()],
-                            choices=[('Sunday', 0),
-                                     ('Monday', 1), 
-                                     ('Tuesday', 2), 
-                                     ('Wednesday', 3), 
-                                     ('Thursday', 4), 
-                                     ('Friday', 5), 
-                                     ('Saturday', 6)])
+                            choices=[(0, 'Sunday'),
+                                     (1, 'Monday'), 
+                                     (2, 'Tuesday'), 
+                                     (3, 'Wednesday'), 
+                                     (4, 'Thursday'), 
+                                     (5, 'Friday'), 
+                                     (6, 'Saturday')])
     dive_date = DateField('Dive Date', validators=[Optional()], format='%m/%d/%Y')
     dive_time = TimeField('Dive Time', default=datetime.now(), validators=[DataRequired()])
-    rating = RadioField('Dive Rating', default=3, validators=[DataRequired()],
+    rating = SelectField('Dive Rating', default=3, validators=[DataRequired()],
                         choices=[(0, 'Worst'),
                                  (1, 'Bad'),
                                  (2, 'Poor'),

@@ -1,11 +1,12 @@
 import os
 from jinja2 import StrictUndefined
-from flask import Flask, render_template, redirect, url_for, flash, request, jsonify
+from flask import Flask, render_template, redirect, url_for, flash, jsonify
 from flask_debugtoolbar import DebugToolbarExtension
 from forms import Register, Login, Review
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager, login_user, current_user, logout_user, login_required
 from model import User, Site, Dive, connect_to_db, db, datetime
+from helpload import run_goog_places_api
 
 app = Flask(__name__)
 
@@ -23,7 +24,7 @@ def load_user(user_id):
 @app.route("/")
 def home():
     marker = Site.query.all()          
-    return render_template("home.html", title="Welcome!",
+    return render_template("home.html", title="Go Glean!",
                                         marker=marker)
 
 @app.route('/api/sites-info')
@@ -102,38 +103,55 @@ def register():
     return render_template("register.html", title="Get Diving!", form=form)
 
 
-# @app.route("/add-dive/new", methods = ("GET", "POST"))
-# # @login_required
-# def add_dive():
-#     form = Review()
-#     if form.validate_on_submit():
-#         # if site does not exist in db, add new row to Site and Dive
-#         if form.dive_address.data or form.dive_name.data not in Site.query.filter(address, site_name):       
-#             site = Site(site_name=form.dive_name.data, address=form.dive_address.data)
-#             dive = Dive(                    
-#                         dive_day=form.dive_day.data,
-#                         dive_date=form.dive_date.data,
-#                         dive_time=form.dive_time.data,
-#                         rating=form.rating.data,
-#                         safety=form.safety.data,
-#                         items=form.items.data
-#                         user_id=current_user
-#                         site_id = site.site_id                                  
-#                         )
-#         else:
-#             site_info = Site.query.filter(address=form.dive_address.data, site_name=form.dive_name.data)
-#             dive = Dive(                    
-#                         dive_day=form.dive_day.data,
-#                         dive_date=form.dive_date.data,
-#                         dive_time=form.dive_time.data,
-#                         rating=form.rating.data,
-#                         safety=form.safety.data,
-#                         items=form.items.data
-#                         user_id=current_user
-#                         site_id = )                                  
-#                         )
+@app.route("/add-dive/new", methods = ("GET", "POST"))
+@login_required
+def add_dive():
+    form = Review()
+    if form.validate_on_submit():
+       
+        dive_address = form.dive_address.data
+        dive_name = form.dive_name.data
+        
+        if (dive_address,) in db.session.query(Site.address).all() and (dive_name,) in db.session.query(Site.site_name).all():
+            
+            site_id = db.session.query(Site.site_id).filter(Site.site_name==dive_name, Site.address==dive_address).first()[0]
+            
+            dive = Dive(                    
+                        dive_day=form.dive_day.data,
+                        dive_date=form.dive_date.data,
+                        dive_time=form.dive_time.data,
+                        rating=form.rating.data,
+                        safety=form.safety.data,
+                        items=form.items.data,
+                        user_id=current_user.user_id,
+                        site_id = site_id
+                        )
 
-#     return render_template('profile.html', title='profile')
+        # if site not in db, add new row to 'sites' run goog api and populate Dive
+        else:
+
+            run_goog_places_api(dive_name, dive_address)
+            
+            new_site_id = db.session.query(Site.site_id).filter(Site.site_name==dive_name, Site.address==dive_address).first()[0]
+        
+            dive = Dive(                    
+                        dive_day=form.dive_day.data,
+                        dive_date=form.dive_date.data,
+                        dive_time=form.dive_time.data,
+                        rating=form.rating.data,
+                        safety=form.safety.data,
+                        items=form.items.data,
+                        user_id=current_user.user_id,
+                        site_id = new_site_id
+                        )
+            
+            db.session.add(dive)
+            db.session.commit()    
+
+            flash(f"Thanks, {current_user.user_name}! Your dive has been added to your profile. You can now look up similar dives.", "success")
+            return redirect(url_for("home"))  # change this redirect to profile                       
+                
+    return render_template("newdive.html", title="Save the Dive!", form=form)
     
 
 # @app.route("/profile/<int: user_id>")

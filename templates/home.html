@@ -7,7 +7,8 @@
 {% endblock %}
 
 {% block content %}
-<h1>Qui Glane</h1>
+<h1>Let's get gleaning.</h1>
+<h2>It's a dive, so save the dive!</h2>
 
 <div class="text-muted">
 	<p>Start saving your dives!
@@ -21,31 +22,16 @@
 <!--The div element for the map -->
 <div id="map"></div>
 
-<h2>Here's a list of dive sites that will go on the map</h2>
-	<table style="width: 100%">
-		<tr>
-			<th>Business Name</th>			
-			<th>Latitude</th>
-			<th>Longitude</th>
-			<th>Closing Time</th>
-		</tr>
-		
-			{% for mark in marker %}
-			<tr>	
-				<td>{{ mark.site_name }}</td>
-				<td>{{ mark.latitude }}</td>
-				<td>{{ mark.longitude }}</td>
-				<td>{{ mark.close_time}}</td>
-			</tr>
-			{% endfor %}	
-		
-	</table>
-	
+<div class="text-muted">
+	<p class="acknowledgement"><small>Primary data was provided by <a class="freegan-link" href="https://freegan.info/">freegan.info</a>.</small></p>
+	<p class="care-notes">Plase respect the <strong>CARDINAL RULE</strong> of trashpicking — don’t make a mess! Open bags carefully and reclose them. Make it look like you were never there, so the place you are recovering waste from won’t chase away foragers in the future! Also, keep note of all local and municipal laws regarding dumpster diving for your safety.</p>
+</div>
+
 </div>	
 
-<script
+<!-- <script
 	async defer
 	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZ2sdOS6MD6Z4gB_cw40jz0qhy8e1qkDo&callback=initMap">
-</script>
+</script> -->
 {% endblock %}
 

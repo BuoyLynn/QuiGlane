@@ -21,10 +21,8 @@ class User(db.Model, UserMixin):
 
     def get_id(self):
         return(self.user_id)
-         
     
     def __repr__(self):
-
         return f"<User user_id={self.user_id} user_name={self.user_name}>"
 
 
@@ -49,7 +47,6 @@ class Site(db.Model):
     dive = db.relationship("Dive", backref='site', lazy=True)
 
     def __repr__(self):
-
         return f"""<{self.site_id}: {self.site_name} 
                     Lat={self.latitude} Lng={self.latitude}
                     Cat={self.category[0:2]}>"""
@@ -70,7 +67,6 @@ class Dive(db.Model):
     site_id = db.Column(db.Integer, db.ForeignKey("sites.site_id"), nullable=False)
 
     def __repr__(self):
-
         return f"<Dive @ site_id:{self.site_id} rated {self.rating} by user ID: {self.user_id}>"
 
 

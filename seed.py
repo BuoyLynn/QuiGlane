@@ -3,9 +3,6 @@ import json
 import datetime
 import requests
 from sqlalchemy import func
-# import nltk
-# from nltk.tokenize import word_tokenize
-# from nltk.corpus import stopwords
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime, date, time
 
@@ -44,8 +41,8 @@ def add_site_place_id():
         # Weed out failed search.
         if place_api_returns['status'] == 'OK':
             place_id = place_api_returns['candidates'][0]['place_id']
-        site.place_id = place_id
-        db.session.commit()
+            site.place_id = place_id
+            db.session.commit()
     
 
 def add_site_details():

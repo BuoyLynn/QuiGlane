@@ -2,12 +2,50 @@
 
 {% block content %}
 	<div>
-	<form action="/add-dive/new", method="GET"> 
+		<h1>Hey, {{ current_user.user_name }}. How was your dive? </h1>
+		<p>By adding a dive, you can build your profile and help others join the movement!</p>
+	<form action="/add-dive/new", method="POST"> 
 		
-		<fieldset class="form">
-			
-			<legend>Buid your glean profile by adding your dives!</legend>
-			
+	<fieldset class="form">			
+		
+		<div class ="form" id="textform">
+			{{ form.dive_name.label }}
+			{{ form.dive_name }}
+		</div>
+		<div class ="form" id="textform">
+			{{ form.dive_address.label }}
+			{{ form.dive_address }}
+		</div>
+		<div class ="form" id="textform">
+			{{ form.dive_day.label }}
+			{{ form.dive_day }}
+		</div>
+		<div class ="form" id="form-datefield">
+			{{ form.dive_date.label }}
+			{{ form.dive_date }}
+		</div>
+		<div class ="form" id="form-timefield">
+			{{ form.dive_time.label }}
+			{{ form.dive_time }}
+		</div>
+		<div class ="form" id="form-radfield">
+			{{ form.rating.label }}
+			{{ form.rating }}
+		</div>
+		<div class ="form" id="form-boolfield">
+			{{ form.safety.label }}
+			If YES {{ form.safety }}
+		</div>
+		<div class ="form" id="textbox">
+			{{ form.items.label }} 
+			{{ form.items }}
+		</div>
+		<div class="form">
+			{{ form.submit(class="btn btn-dark btn-sm") }}
+				</div>	
+	</fieldset>
+	
+	
 		
 	</div>
 

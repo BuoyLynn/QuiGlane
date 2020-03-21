@@ -1,16 +1,7 @@
 /* 
-var [LOCATION/MARKER]
-lat = Site.latitude
-lng = Site.longitude
 
 var [map]
 center: current_user's current location (GEOLOCATION)
-
-var [contentString]
-<h1>{{ Site.address }}</h1>
-<p><small><b>Category:</b>{{ Site.category }}</small></p>
-<p>{{ Dive.items }}
-<p>...etc etcn Dive.dive_time, Dive.safety
 
 var [marker]
 if current_time in time_delta=Site.open and Site.close:
@@ -55,9 +46,9 @@ function initMap(){
             '<div id="bodyContent">'+
             '<p>' + site.details +'</p>'+            
             '<p>Business closes at '+ closeTime +'</p>'+
-            '<p>Last dive time reported at '+ diveTime +'</p>'+
-            '<p>Most recent dive rated: ' + site.rating + '</p>'+
-            '<p>with Safety details: ' + site.safety + '</p>'+
+            '<p>Most recent dive time reported at '+ diveTime +'</p>'+
+            '<p>Most recent dive was rated: ' + site.rating + '</p>'+
+            '<p>Safety notes: ' + site.safety + '</p>'+
             '</div>'+
             '</div>';
             // Create popup box
