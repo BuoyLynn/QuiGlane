@@ -1,7 +1,7 @@
 from datetime import datetime, date, time
 from flask_wtf import FlaskForm
 from flask_login import current_user
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, SelectField, DateField, TimeField, RadioField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, SelectField, DateField, TimeField, RadioField, TextAreaField
 from wtforms.validators import DataRequired, Optional, Length, Email, EqualTo, ValidationError
 from model import User, Site, Dive
 
@@ -62,5 +62,5 @@ class Review(FlaskForm):
                                  (4, 'Good'),
                                  (5, 'Excellent')])
     safety = BooleanField('Safe Dive?', validators=[DataRequired()])
-    items = StringField('What did you find?', validators=[Optional(), Length(max=300)])
+    items = TextAreaField('What did you find?', validators=[Optional(), Length(max=300)])
     submit = SubmitField('Add Dive')

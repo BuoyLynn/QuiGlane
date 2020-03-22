@@ -149,16 +149,26 @@ def add_dive():
             db.session.commit()    
 
             flash(f"Thanks, {current_user.user_name}! Your dive has been added to your profile. You can now look up similar dives.", "success")
-            return redirect(url_for("home"))  # change this redirect to profile                       
-                
+            return redirect(url_for("dive-cards", user_id=current_user.user_id))                      
+    
+        # flash(f"Looks like there was something missing from you dive review. Please try again.", "warning")            
     return render_template("newdive.html", title="Save the Dive!", form=form)
     
 
-# @app.route("/profile/<int: user_id>")
-# @login_required
-# def profile():
-#     dives = Dive.query.filter_by(current_user.dives).all()
-#     return render_template('profile.html', dives=dives)
+@app.route("/dive-cards/<int:user_id>")
+@login_required
+def dive_cards(user_id):
+    user = User.query.filter_by(user_id=user_id).first_or_404()
+    dives = Dive.query.filter_by(user_id=user_id).all()
+    return render_template('profile.html', title=user.user_name, dives=dives)
+
+
+@app.route("/site-cards/<int:site_id>")
+@login_required
+def get_site_cards(site_id):
+    site = Site.query.filter_by(site_id=site_id).first_or_404()
+    site_dives = Dive.query.filter_by(site_id=site_id).all() 
+    return render_template('dives-from-card.html', title=site.site_name, site_dives=site_dives, site=site)
 
 
 if __name__ == "__main__":

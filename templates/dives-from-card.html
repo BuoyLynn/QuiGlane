@@ -1,14 +1,15 @@
 {% extends "base.html" %}
 
 {% block content %}
-   <!-- create card for each dive using bootstrap -->
+   <!-- create card for each dive form card using bootstrap -->
    <div>
-      <h2 class="profile-header">{{ current_user.user_name }}</h2>
-      <p class="profile-email">{{ current_user.email }}</p>
+      <h2 class="site-card">{{ site.site_name }}</h2>
+      <p class="message">Unlock more of reviews (per location) made by your fellow gleaners by adding a Dive Review Card.</p>
+      <p class="redirect-login">Go back to my <a class="redirect-login" href="{{ url_for('dive_cards', user_id=current_user.user_id) }}">Dive Cards.</a></p>
               
       
       <div class="row row-cols-1 row-cols-md-3">
-      {% for dive in dives %}
+      {% for dive in site_dives %}
 
          <div class="col mb-4">
             <div class="card h-100">
@@ -20,8 +21,8 @@
             <ul class="list-group list-group-flush">
             <li class="list-group-item">Rating: {{ dive.rating }}</li>
             <li class="list-group-item">Safety: {{ dive.safety }}</li>
-            <li class="list-group-item"><a href="{{ url_for('get_site_cards', site_id=dive.site.site_id) }}" class="card-link">Check out more dives for this site!</a></li>
-            <!-- <li class="list-group-item"><a href="/site-cards/{{ dive.site.site_id }}" class="card-link">Check out more dives for this site!</a></li> -->
+            <li class="list-group-item">Dive Time: {{ dive.dive_time }}</li>
+            <li class="list-group-item">Created by: {{ dive.user.user_name }}</li>
             </ul>         
                      
          </div>
