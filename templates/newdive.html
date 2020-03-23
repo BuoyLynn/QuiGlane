@@ -4,9 +4,11 @@
 	<div>
 		<h1>Hey, {{ current_user.user_name }}. How was your dive? </h1>
 		<p>By adding a dive, you can build your profile and help others join the movement!</p>
-	<form action="/add-dive/new", method="POST"> 
-		
-	<fieldset class="form">		
+	
+	<form action="/add-dive/new" method="POST"> 
+		{{ form.hidden_tag() }}
+	
+		<fieldset class="form">		
 		
 		<div class ="form" id="textform">
 			{{ form.dive_name.label }}
@@ -40,10 +42,13 @@
 			{{ form.items.label }} 
 			{{ form.items }}
 		</div>
+		
+	</fieldset>
+
 		<div class="form">
 			{{ form.submit(class="btn btn-dark btn-sm") }}
-				</div>	
-	</fieldset>
+		</div>	
+	
 	
 	
 		
