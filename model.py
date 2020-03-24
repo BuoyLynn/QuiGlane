@@ -49,7 +49,7 @@ class Site(db.Model):
     def __repr__(self):
         return f"""<{self.site_id}: {self.site_name} 
                     Lat={self.latitude} Lng={self.latitude}
-                    Cat={self.category[0:2]}>"""
+                    Cat={self.category[0:2]}>"""    
 
 class Dive(db.Model):
     """Dive Ratings and Review"""
@@ -78,6 +78,7 @@ def connect_to_db(app):
     
     app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///glean'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    # app.config['SQLALCHEMY_ECHO'] = True
     db.app = app
     db.init_app(app)
   

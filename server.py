@@ -31,42 +31,48 @@ def home():
 @app.route('/api/sites-info')
 def site_info():
     sites_dives = db.session.query(Site, Dive).outerjoin(Dive).all()
+    # print(f"sites_dives[0] = {sites_dives[0]} Opentime = {sites_dives[0].open_time} ")
     make_info_json = []
     for site, dive in sites_dives:
         # convert all time to string to jasonify
-        if dive.dive_time is not None: # otherwise will through error, nonetype cannot be strftime
+        if dive.dive_time: # otherwise will through error, nonetype cannot be strftime
             dive.dive_time = dive.dive_time.strftime('%H%M')
-        else:
-            pass
+        
+        # print(f"site = {site} type(open_time) = {type(site.open_time)} open_time = {site.open_time} dive_id={dive.dive_id} site_id={site.site_id}")
         if site.open_time or site.close_time:
-        # if site.open_time != None or site.close_time != None:
-            site.open_time = site.open_time.strftime('%H:%M')
-            site.close_time = site.close_time.strftime('%H:%M')
-        else:    
-            pass
+        # if time is a str, convert to datettime
+            if type(site.open_time) == str:
+                open_time = datetime(site.open_time)
+                open_time = open_time.strftime('%H%M')
+                close_time = datetime(site.close_time)
+                close_time = close_time.strftime('%H%M')
+            # else run strftime            
+            open_time = site.open_time.strftime('%H%M')
+            close_time = site.close_time.strftime('%H%M')
+        
             
-        site_info = {'lat': site.latitude, 
-                       'lng': site.longitude,
-                       'business': site.site_name,
-                       'address': site.address,
-                       'category': site.category,
-                       'open': site.open_time,
-                       'close': site.close_time,
-                       'dive_day': dive.dive_day,
-                       'dive_time': dive.dive_time,
-                       'rating': dive.rating,
-                       'safety': dive.safety,
-                       'details': dive.items                
-                    }
-        make_info_json.append(site_info)
+            site_info = {'lat': site.latitude, 
+                        'lng': site.longitude,
+                        'business': site.site_name,
+                        'address': site.address,
+                        'category': site.category,
+                        'open': open_time,
+                        'close': close_time,
+                        'dive_day': dive.dive_day,
+                        'dive_time': dive.dive_time,
+                        'rating': dive.rating,
+                        'safety': dive.safety,
+                        'details': dive.items                
+                        }
+            make_info_json.append(site_info)
         # sites_info = json.dumps(make_info_json)
     # return sites_info
     return jsonify(make_info_json)
 
-# API for data to be added to user's GOOG maps
-@app.route('/api/user-dives/<int:user_id>')
-# @login_required
-def user_dives(user_id):
+# # API for data to be added to user's GOOG maps
+# @app.route('/api/user-dives/<int:user_id>')
+# # @login_required
+# def user_dives(user_id):
     user_dives = db.session.query(Dive).filter_by(user_id=user_id).all()
     make_info_json = []
     for dive in user_dives:

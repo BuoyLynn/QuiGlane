@@ -10,14 +10,26 @@
 <h1>Let's get gleaning.</h1>
 <h2>It's a dive, so save the dive!</h2>
 
-<div class="text-muted">
-	<p>Start saving your dives!
-		<a class="redirect-login" href="{{ url_for('login') }}">login.</a>
-	</p>
-	<p><small>Don't have an account? Register  
-		<a class="redirect-login" href="{{ url_for('register') }}">here.</a>
-	</small></p>
-</div>
+	{% if current_user.is_authenticated %}
+	<div class="text-muted">
+		<h5>Hard days gleaning? Save your glean for future reference
+			<a class="redirect" href="{{ url_for('add_dive') }}">here.</a>
+		</h5>			
+			<p class="home-info">If you have a dive-card that matches another gleaners' review location, you can unlock all the reviews of that location, coordinate, and organize!</p>
+			<h7>Check your hauls    
+			<a class="redirect" href="{{ url_for('dive_cards', user_id=current_user.user_id) }}">here.</a>
+			</h7>
+	</div>
+	{% else %}
+	<div class="text-muted">
+		<p>Start saving your dives!
+			<a class="redirect" href="{{ url_for('login') }}">login.</a>
+		</p>
+		<p><small>Don't have an account? Register  
+			<a class="redirect" href="{{ url_for('register') }}">here.</a>
+		</small></p>
+	</div>
+	{% endif %}
 
 <div id="map"></div>
 <!--The div element for the map -->
