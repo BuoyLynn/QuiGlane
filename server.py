@@ -1,6 +1,6 @@
 # import os
 from jinja2 import StrictUndefined
-from flask import Flask, render_template, redirect, url_for, flash, jsonify
+from flask import Flask, render_template, redirect, url_for, flash, jsonify, request
 from flask_debugtoolbar import DebugToolbarExtension
 from forms import Register, Login, Review
 from flask_bcrypt import Bcrypt
@@ -38,10 +38,11 @@ def site_info():
             dive.dive_time = dive.dive_time.strftime('%H%M')
         else:
             pass
-        if site.open_time != None or site.close_time != None:
-            site.open_time = site.open_time.strftime('%H%M')
-            site.close_time = site.close_time.strftime('%H%M')
-        else:
+        if site.open_time or site.close_time:
+        # if site.open_time != None or site.close_time != None:
+            site.open_time = site.open_time.strftime('%H:%M')
+            site.close_time = site.close_time.strftime('%H:%M')
+        else:    
             pass
             
         site_info = {'lat': site.latitude, 
@@ -141,17 +142,16 @@ def register():
 @login_required
 def add_dive():
     form = Review()
-    if form.validate_on_submit():
+    if request.method == "POST":
+    # if form.validate_on_submit():
        
         dive_address = form.dive_address.data
         dive_name = form.dive_name.data
-
+        # Query Site from db .
         site = Site.query.filter(Site.site_name==dive_name, Site.address==dive_address).first()
-
-        if site:
-        
-        # if (dive_address,) in db.session.query(Site.address).all() and (dive_name,) in db.session.query(Site.site_name).all():
-            
+        # If a match
+        if site != None:
+                          
             dive = Dive(                    
                         dive_day=form.dive_day.data,
                         dive_date=form.dive_date.data,
@@ -164,37 +164,42 @@ def add_dive():
                         )
 
             db.session.add(dive)
+            db.session.commit()
            
-        # # if site not in db, add new row to 'sites' run goog api and populate Dive
-        # else:
+        # if site not in db, add new row to 'sites' run goog api and populate Dive
+        else:
 
-        #     create_site = Site(site_name=dive_name, address=dive_address)
-        #     db.session.add(create_site)
+            create_site = Site(site_name=dive_name, address=dive_address)
+            db.session.add(create_site)
 
-        #     run_goog_places_api(dive_name, dive_address, create_site.site_id)
+            # run goog places api on new site to populate remaining fields
+            run_goog_places_api(dive_name, dive_address, create_site.site_id)
             
-        #     new_site_id = db.session.query(Site.site_id).filter(Site.site_name==dive_name, Site.address==dive_address).first()[0]
+            # Grab new site id to add to dive
+            new_site_id = db.session.query(Site.site_id).filter(Site.site_name==dive_name, Site.address==dive_address).first()[0]
         
-        #     dive = Dive(                    
-        #                 dive_day=form.dive_day.data,
-        #                 dive_date=form.dive_date.data,
-        #                 dive_time=form.dive_time.data,
-        #                 rating=form.rating.data,
-        #                 safety=form.safety.data,
-        #                 items=form.items.data,
-        #                 user_id=current_user.user_id,
-        #                 site_id = new_site_id
-        #                 )
+            dive = Dive(                    
+                        dive_day=form.dive_day.data,
+                        dive_date=form.dive_date.data,
+                        dive_time=form.dive_time.data,
+                        rating=form.rating.data,
+                        safety=form.safety.data,
+                        items=form.items.data,
+                        user_id=current_user.user_id,
+                        site_id = new_site_id
+                        )
             
-        #     db.session.add(dive)
-        db.session.commit()    
+            db.session.add(dive)
+            db.session.commit()    
 
-        # flash to template!
-
+        # flash in dive_cards if successful
         flash(f"Thanks, {current_user.user_name}! Your dive has been added to your profile. You can now look up similar dives.", "success")
-        return redirect(url_for("dive_cards", user_id=current_user.user_id))                      
+        return redirect(url_for("dive_cards", user_id=current_user.user_id))
     
-        # flash(f"Looks like there was something missing from you dive review. Please try again.", "warning")            
+    # if fails to validate stay in newdive and flash (not working...keeps flaishing all the time...)
+    # elif not form.validate_on_submit():
+    #     flash(f"Looks like there was something missing from you dive review. Please try again.", "warning")            
+    
     return render_template("newdive.html", title="Save the Dive!", form=form)
     
 

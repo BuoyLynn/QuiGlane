@@ -61,6 +61,6 @@ class Review(FlaskForm):
                                  (3, 'Meh'),
                                  (4, 'Good'),
                                  (5, 'Excellent')])
-    safety = BooleanField('Safe Dive?', validators=[DataRequired()])
+    safety = BooleanField('Safe Dive?', default="checked", validators=[Optional()])
     items = TextAreaField('What did you find?', validators=[Optional(), Length(max=300)])
     submit = SubmitField('Add Dive')

@@ -70,7 +70,6 @@ class Dive(db.Model):
         return f"<Dive @ site_id:{self.site_id} rated {self.rating} by user ID: {self.user_id}>"
 
 
-
 #################################
 # Connect db to app (server.py)
 

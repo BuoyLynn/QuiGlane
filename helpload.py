@@ -9,7 +9,7 @@ db = SQLAlchemy()
 # In server, will be passing params (form.dive_name.data, form.dive_name.data)
 def run_goog_places_api(site_name, address, site_id):
     
-    update_site = Site.query.filter_by(site_id=site_id)
+    # update_site = site.query.filter_by(site_id=site_id).first()
 
     params = {
               'key': os.getenv("GOOGKEY"),
@@ -24,7 +24,6 @@ def run_goog_places_api(site_name, address, site_id):
     if place_api_returns['status'] == 'OK':
         place_id = place_api_returns['candidates'][0]['place_id']
         
-
         # As place_id returns, get other info from GOOG Places and populate
         params = {
                   'key': os.getenv("GOOGKEY"),

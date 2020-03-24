@@ -21,7 +21,7 @@
             <ul class="list-group list-group-flush">
             <li class="list-group-item">Rating: {{ dive.rating }}</li>
             <li class="list-group-item">Safety: {{ dive.safety }}</li>
-            <li class="list-group-item">Dive Time: {{ dive.dive_time }}</li>
+            <li class="list-group-item">Dive Time: {{ dive.dive_time.strftime('%H:%M') }}</li>
             <li class="list-group-item">Created by: <strong>{{ dive.user.user_name }}</strong></li>
             </ul>         
                      
