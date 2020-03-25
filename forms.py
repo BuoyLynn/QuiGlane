@@ -42,7 +42,7 @@ class Login(FlaskForm):
 class Review(FlaskForm):
     """Dive Review"""
 
-    dive_name = StringField('Dumpster Owner (Business Name)', validators=[DataRequired(), Length(max=200)])
+    dive_name = StringField('Dumpster Owner', validators=[DataRequired(), Length(max=200)],render_kw={"placeholder": "Associated Business Name"})
     dive_address = StringField('Address', validators=[Optional()])
     dive_day = SelectField('Dive Day', validators=[DataRequired()],
                             choices=[(0, 'Sunday'),
@@ -52,7 +52,7 @@ class Review(FlaskForm):
                                      (4, 'Thursday'), 
                                      (5, 'Friday'), 
                                      (6, 'Saturday')])
-    dive_date = DateField('Dive Date', validators=[Optional()], format='%m/%d/%Y')
+    dive_date = DateField('Dive Date', validators=[Optional()], format='%m/%d/%Y', render_kw={"type": "date"})
     dive_time = TimeField('Dive Time', default=datetime.now(), validators=[DataRequired()])
     rating = SelectField('Dive Rating', default=3, validators=[DataRequired()],
                         choices=[(0, 'Worst'),
@@ -62,5 +62,5 @@ class Review(FlaskForm):
                                  (4, 'Good'),
                                  (5, 'Excellent')])
     safety = BooleanField('Safe Dive?', default="checked", validators=[Optional()])
-    items = TextAreaField('What did you find?', validators=[Optional(), Length(max=300)])
+    items = TextAreaField('What did you find?', validators=[Optional(), Length(max=300)], render_kw={"placeholder": "Eg. fresh cabbage, firm potatoes, squashed tomatoes, bread baked today and more!"})
     submit = SubmitField('Add Dive')
