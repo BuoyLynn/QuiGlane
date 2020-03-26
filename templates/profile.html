@@ -24,17 +24,50 @@
 			<p class="card-text">{{ dive.items }}</p>
 			</div>
 			<ul class="list-group list-group-flush">
-			<li class="list-group-item">Rating: {{ dive.rating }}</li>
-			<li class="list-group-item">Safety: {{ dive.safety }}</li>
-			<li class="list-group-item"><a href="{{ url_for('get_site_cards', site_id=dive.site.site_id) }}" class="card-link">Check out more dives for this site!</a></li>
-			<!-- <li class="list-group-item"><a href="/site-cards/{{ dive.site.site_id }}" class="card-link">Check out more dives for this site!</a></li> -->
-			</ul>         
-								
+				<li class="list-group-item">Rating: {{ dive.rating }}</li>
+				<li class="list-group-item">Safety: {{ dive.safety }}</li>
+				<li class="list-group-item"><a href="{{ url_for('get_site_cards', site_id=dive.site.site_id) }}" class="card-link">Check out more dives for this site!</a></li>
+				<!-- Make sure only the logged in user can change their dives -->
+				{% if dive.user_id == current_user.user_id %}
+				<li class="list-group-item">
+					<a class="btn btn-success btn-sm" href="{{ url_for('update_dive', dive_id=dive.dive_id) }}">Update</a>
+					<button type="button" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#deletePopUp">Delete</button>
+				</li>
+
+				<!-- Modal: Delete pop up confirmation from bootstrap -->
+				<div class="modal fade" id="deletePopUp" tabindex="-1" role="dialog" aria-labelledby="deletePopUpLabel" aria-hidden="true">
+					<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+						<h5 class="modal-title" id="deletePopUpLabel">Are you sure you want to delete?</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						</div>
+						<div class="modal-body">
+						By deleting your hard-earned record of gleaning, you will no longer be able to unlock access to related dive reviews and experienced gleaners.
+						</div>
+						<div class="modal-footer">
+						<button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cancel</button>
+						<!-- convert bootstrap button into submit form -->
+						<form action="{{ url_for('delete_dive', dive_id=dive.dive_id) }}" method="POST">
+							<input type="submit" class="btn btn-primary btn-sm" value="Delete">
+							</form>
+						</div>
+					</div>
+					</div>
+				</div>
+
+				{% endif %} <!-- ends condition to check current_user access -->
+			
+			</ul> 								
 			</div>
 		</div>
-		{% endfor %}
+		
+		{% endfor %}<!-- ends card loop -->
 		</div>
 	</div>
+		
 	<script
 	async defer
 	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZ2sdOS6MD6Z4gB_cw40jz0qhy8e1qkDo&callback=initMapUser">

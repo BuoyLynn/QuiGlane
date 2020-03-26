@@ -23,13 +23,15 @@ def load_user(user_id):
 
 @app.route("/")
 def home():
+    """Route to App home"""
     marker = Site.query.all()          
     return render_template("home.html", title="Go Glean!",
                                         marker=marker)
 
-# API for data to be added to GOOG maps HOME
+# API Routes
 @app.route('/api/sites-info')
 def site_info():
+    """JSON Route to seed markers on Google Maps API"""
     sites_dives = db.session.query(Site, Dive).outerjoin(Dive).all()
     # print(f"sites_dives[0] = {sites_dives[0]} Opentime = {sites_dives[0].open_time} ")
     make_info_json = []
@@ -69,39 +71,16 @@ def site_info():
     # return sites_info
     return jsonify(make_info_json)
 
-# # API for data to be added to user's GOOG maps
-# @app.route('/api/user-dives/<int:user_id>')
-# # @login_required
-# def user_dives(user_id):
-    user_dives = db.session.query(Dive).filter_by(user_id=user_id).all()
-    make_info_json = []
-    for dive in user_dives:
-        # convert all time to string to jasonify
-        if dive.dive_time is not None: # otherwise will through error, nonetype cannot be strftime
-            dive.dive_time = dive.dive_time.strftime('%H%M')
-        else:
-            pass
-        if dive.site.open_time != None or dive.site.close_time != None:
-            dive.site.open_time = dive.site.open_time.strftime('%H%M')
-            dive.site.close_time = dive.site.close_time.strftime('%H%M')
-        else:
-            pass
-            
-        user_dive_info = {'lat': dive.site.latitude, 
-                       'lng': dive.site.longitude,
-                       'business': dive.site.site_name,
-                       'address': dive.site.address,
-                       'category': dive.site.category,                       
-                       'dive_day': dive.dive_day,
-                       'dive_time': dive.dive_time,
-                       'rating': dive.rating,
-                       'safety': dive.safety,
-                       'details': dive.items                
-                    }
-        make_info_json.append(user_dive_info)
-        # sites_info = json.dumps(make_info_json)
-    # return sites_info
-    return jsonify(make_info_json)
+
+@app.route('/api/sites-autocomp')
+def site_autocomp():
+    """JSON generation to feed AJAX for autocomplete in new-dive forms"""
+    site = Site.query.all()
+    make_auto_json = []
+    for site in sites:
+        site_name = site[0]
+        
+        
 
 @app.route("/login", methods=["GET", "POST"])
 def login():  
@@ -215,6 +194,58 @@ def dive_cards(user_id):
     user = User.query.filter_by(user_id=user_id).first_or_404()
     dives = Dive.query.filter_by(user_id=user_id).all()
     return render_template('profile.html', title=user.user_name, dives=dives)
+
+
+@app.route("/dive-cards/<int:dive_id>/update", methods=["GET", "POST"])
+@login_required
+def update_dive(dive_id):
+    update_dive = Dive.query.get(dive_id)
+    site = Site.query.filter_by(site_id=update_dive.site_id).first()
+    if update_dive.user_id != current_user.user_id:
+        
+        flash("Hey! Who dares to pilfer another's glean?", "danger")
+        return redirect(url_for("home"))
+    
+    form = Review()
+    if request.method == "POST":
+        update_dive.dive_day = form.dive_day.data
+        update_dive.dive_date = form.dive_date.data
+        update_dive.dive_time = form.dive_time.data
+        update_dive.rating = form.rating.data
+        update_dive.safety = form.safety.data
+        update_dive.items = form.items.data
+        
+        db.session.commit()
+
+        flash(f"Your dive was successfully updated.", "success")
+        return redirect(url_for("dive_cards", user_id=current_user.user_id))
+    
+    # Open update forms pre-populated with data
+    elif request.method == "GET":
+        form.dive_day.data = update_dive.dive_day
+        form.dive_date.data = update_dive.dive_date
+        form.dive_time.data = update_dive.dive_time
+        form.rating.data = update_dive.rating
+        form.safety.data = update_dive.safety
+        form.items.data = update_dive.items
+    
+    return render_template("updatedive.html", title="Dive Update", form=form, update_dive=update_dive, site=site)
+
+
+@app.route("/dive-cards/<int:dive_id>/delete", methods=["POST"])
+@login_required
+def delete_dive(dive_id):
+    delete_dive = Dive.query.get(dive_id)
+    if delete_dive.user_id != current_user.user_id:
+        
+        flash("Careful this is not your glean to delete! Karma karma karma.", "danger")
+        return redirect(url_for("home"))
+    
+    db.session.delete(delete_dive)
+    db.session.commit()
+
+    flash(f"Your dive review was deleted. Hope to see you add another soon!", "dark")
+    return redirect(url_for("dive_cards", delte_dive=delete_dive, user_id=current_user.user_id))
 
 
 @app.route("/site-cards/<int:site_id>")
