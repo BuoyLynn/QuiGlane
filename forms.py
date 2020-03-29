@@ -42,8 +42,8 @@ class Login(FlaskForm):
 class Review(FlaskForm):
     """Dive Review"""
 
-    dive_name = StringField('Dumpster Owner', validators=[DataRequired(), Length(max=200)],render_kw={"placeholder": "Associated Business Name"})
-    dive_address = StringField('Address', validators=[Optional()])
+    dive_name = StringField('Dumpster Owner', validators=[DataRequired(), Length(max=200)],render_kw={"placeholder": "Name of Business", "id": "form-site-name"})
+    dive_address = StringField('Address', validators=[Optional()], render_kw={"id": "form-site-address"})
     dive_day = SelectField('Dive Day', validators=[DataRequired()],
                             choices=[(0, 'Sunday'),
                                      (1, 'Monday'), 

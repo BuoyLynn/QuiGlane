@@ -52,7 +52,10 @@ def run_goog_places_api(site_name, address, site_id):
                 if 'close' in site_details['result']['opening_hours']['periods'][0]:
                     close_t = site_details['result']['opening_hours']['periods'][0]['close']['time']                   
                 else:
-                    close_t = open_t            
+                    close_t = open_t
+        # # If status not 'ok' and nothing is returned.
+        # open_t = "0000"
+        # close_t = "0000"            
         # add to db.Site columns open_time & close_time
                 new_site = Site(site_name=dive_name, 
                                 address=dive_address,

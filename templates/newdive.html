@@ -1,5 +1,10 @@
 {% extends "base.html" %}
 
+{% block script %}
+
+
+{% endblock %}
+
 {% block content %}
 	<div>
 		<h1>Hey, {{ current_user.user_name }}. How was your dive? </h1>
@@ -10,11 +15,11 @@
 	
 		<fieldset class="form">		
 		
-		<div class ="form" id="textform">
+		<div class="form" name="form-site-name-field">
 			{{ form.dive_name.label }}
 			{{ form.dive_name }}
 		</div>
-		<div class ="form" id="textform">
+		<div class ="form" name="form-site-address-field">
 			{{ form.dive_address.label }}
 			{{ form.dive_address }}
 		</div>
@@ -51,7 +56,6 @@
 
 	</form>
 	
-		
 	</div>
 
     

@@ -9,23 +9,26 @@
               
       <div class="row row-cols-1 row-cols-md-3">
       {% for dive in site_dives[::-1] %}   
-
+         {% if dive.user_id == current_user.user_id %}
+          
+         {% else %}
          <div class="col mb-4">
             <div class="card h-100">
             <div class="card-body">
             <h5 class="card-title">{{ dive.site.site_name }}</h5>
-            <h6 class="card-subtitle mb-2 text-muted"><small>{{ dive.site.address }}</small></h6>           
+            <h6 class="card-subtitle mb-2 text-muted"><small>{{ dive.site.address }}</small></h6>
+            <h6>Reviewed by: <strong>{{ dive.user.user_name }}</strong></h6>
+            <p></p>           
             <p class="card-text">{{ dive.items }}</p>
             </div>
             <ul class="list-group list-group-flush">
                <li class="list-group-item">Rating: {{ dive.rating }}</li>
                <li class="list-group-item">Safety: {{ dive.safety }}</li>
-               <li class="list-group-item">Dive Time: {{ dive.dive_time.strftime('%H:%M') }}</li>
-               <li class="list-group-item">Created by: <strong>{{ dive.user.user_name }}</strong></li>
-            </ul>       
-                  
-         </div>
-      </div>      
+               <li class="list-group-item">Dive Time: {{ dive.dive_time.strftime('%H:%M') }}</li>               
+            </ul>                  
+            </div>
+         </div> 
+         {% endif %}     
       {% endfor %} <!-- ends the card loop -->
       </div>
    </div>

@@ -24,8 +24,14 @@
 			<p class="card-text">{{ dive.items }}</p>
 			</div>
 			<ul class="list-group list-group-flush">
-				<li class="list-group-item">Rating: {{ dive.rating }}</li>
-				<li class="list-group-item">Safety: {{ dive.safety }}</li>
+				<li class="list-group-item">Rating: {{ dive.rating }}/5</li>
+				{% if dive.safety == True %}
+				<li class="list-group-item">Safety Note: Coast is clear.</li>
+				{% elif dive.safety == False %}
+				<li class="list-group-item">Safety Note: Not safe!</li>
+				{% else %}
+				<li class="list-group-item">No note on safety.</li>
+				{% endif %}
 				<li class="list-group-item"><a href="{{ url_for('get_site_cards', site_id=dive.site.site_id) }}" class="card-link">Check out more dives for this site!</a></li>
 				<!-- Make sure only the logged in user can change their dives -->
 				{% if dive.user_id == current_user.user_id %}

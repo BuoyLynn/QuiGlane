@@ -5,16 +5,15 @@
 		<h1>Hey, {{ current_user.user_name }}.</h1>
 			<h2>Feel free to make updates to your dive!</h2> 
 		<p>Update and stay connected!</p>
-	
-		<form action="{{ url_for('update_dive', dive_id=update_dive.dive_id) }}" method="POST"></form>
+		
+		<h4>{{ site.site_name }}</h4>			
+		<h5>{{ site.address }}</h5>
+		
+		<form action="{{ url_for('update_dive', dive_id=update_dive.dive_id) }}" method="POST">
 
 		{{ form.hidden_tag() }}
 	
 		<fieldset class="form">		
-		
-		<h4>{{ site.site_name }}</h4>
-			
-		<h5>{{ site.address }}</h5>
 		
 		<div class ="form" id="textform">
 			{{ form.dive_day.label }}

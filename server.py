@@ -32,13 +32,15 @@ def home():
 @app.route('/api/sites-info')
 def site_info():
     """JSON Route to seed markers on Google Maps API"""
-    sites_dives = db.session.query(Site, Dive).outerjoin(Dive).all()
-    # print(f"sites_dives[0] = {sites_dives[0]} Opentime = {sites_dives[0].open_time} ")
+    sites_dives = db.session.query(Site, Dive).outerjoin(Dive).all()    
     make_info_json = []
     for site, dive in sites_dives:
         # convert all time to string to jasonify
         if dive.dive_time: # otherwise will through error, nonetype cannot be strftime
-            dive.dive_time = dive.dive_time.strftime('%H%M')
+            dive.dive_time = dive.dive_time.strftime('%H%M')            
+        else:
+            dive.dive_time = 'Not Specified'
+    
         
         # print(f"site = {site} type(open_time) = {type(site.open_time)} open_time = {site.open_time} dive_id={dive.dive_id} site_id={site.site_id}")
         if site.open_time or site.close_time:
@@ -67,18 +69,21 @@ def site_info():
                         'details': dive.items                
                         }
             make_info_json.append(site_info)
-        # sites_info = json.dumps(make_info_json)
-    # return sites_info
+    
     return jsonify(make_info_json)
 
 
 @app.route('/api/sites-autocomp')
 def site_autocomp():
     """JSON generation to feed AJAX for autocomplete in new-dive forms"""
-    site = Site.query.all()
-    make_auto_json = []
+    sites = db.session.query(Site.site_name, Site.address).all()
+    site_name_auto_json = []
     for site in sites:
-        site_name = site[0]
+        site = {'site_name': site[0],
+                'address': site[1]}
+        site_name_auto_json.append(site)
+    
+    return jsonify(site_name_auto_json)
         
         
 

@@ -47,9 +47,7 @@ class Site(db.Model):
     dive = db.relationship("Dive", backref='site', lazy=True)
 
     def __repr__(self):
-        return f"""<{self.site_id}: {self.site_name} 
-                    Lat={self.latitude} Lng={self.latitude}
-                    Cat={self.category[0:2]}>"""    
+        return f"""<{self.site_id}: {self.site_name} @{self.address}>"""    
 
 class Dive(db.Model):
     """Dive Ratings and Review"""
@@ -67,7 +65,7 @@ class Dive(db.Model):
     site_id = db.Column(db.Integer, db.ForeignKey("sites.site_id"), nullable=False)
 
     def __repr__(self):
-        return f"<Dive @ site_id:{self.site_id} rated {self.rating} by user ID: {self.user_id}>"
+        return f"<dive_id{self.dive_id} @ site_id:{self.site_id} {self.user_id}>"
 
 
 #################################
