@@ -42,9 +42,9 @@ class Login(FlaskForm):
 class Review(FlaskForm):
     """Dive Review"""
 
-    dive_name = StringField('Dumpster Owner', validators=[DataRequired(), Length(max=200)],render_kw={"placeholder": "Name of Business", "id": "form-site-name"})
-    dive_address = StringField('Address', validators=[Optional()], render_kw={"id": "form-site-address"})
-    dive_day = SelectField('Dive Day', validators=[DataRequired()],
+    dive_name = StringField('Dumpster Owner', validators=[DataRequired(), Length(max=200)],render_kw={"placeholder": "e.g. Whole Foods", "id": "form-site-name", "class": "form-control"})
+    dive_address = StringField('Address', validators=[Optional()], render_kw={"placeholder": "e.g. 7th Avenue between Food st & Drink st", "id": "form-site-address", "class": "form-control"})
+    dive_day = SelectField('Dive Day', validators=[DataRequired()], render_kw={"class": "form-control", "id": "sel1"},
                             choices=[(0, 'Sunday'),
                                      (1, 'Monday'), 
                                      (2, 'Tuesday'), 
@@ -54,7 +54,7 @@ class Review(FlaskForm):
                                      (6, 'Saturday')])
     dive_date = DateField('Dive Date', validators=[Optional()], format='%m/%d/%Y', render_kw={"type": "date"})
     dive_time = TimeField('Dive Time', default=datetime.now(), validators=[DataRequired()])
-    rating = SelectField('Dive Rating', default=3, validators=[DataRequired()],
+    rating = SelectField('Dive Rating', default=3, validators=[DataRequired()], render_kw={"class": "form-control", "id": "sel1"},
                         choices=[(0, 'Worst'),
                                  (1, 'Bad'),
                                  (2, 'Poor'),
@@ -62,5 +62,5 @@ class Review(FlaskForm):
                                  (4, 'Good'),
                                  (5, 'Excellent')])
     safety = BooleanField('Safe Dive?', default="checked", validators=[Optional()])
-    items = TextAreaField('What did you find?', validators=[Optional(), Length(max=300)], render_kw={"placeholder": "Eg. fresh cabbage, firm potatoes, squashed tomatoes, bread baked today and more!"})
+    items = TextAreaField('What did you find?', validators=[Optional(), Length(max=300)], render_kw={"placeholder": "e.g. fresh cabbage, firm potatoes, squashed tomatoes, bread baked today and more!", "class": "form-control", "rows": "3"})
     submit = SubmitField('Add Dive')
