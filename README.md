@@ -1,15 +1,34 @@
 # QuiGlane (pronounced: "Key-Glan")
 
-> An application to help dumpster-divers find beneficial safe dives, and communicate as a community.
+> Inspired by the film "Gleaners and I" by Agnes Varda, the underlying mission of this app is to redefine the dark, dirty, D.L. notions of dumpster-diving as a modern metropolitan form of gleaning.
 
+> The app maps each dive review so that dumpster-divers can access and keep record of safe dives while connecting with one another to coordinate events.
+
+![screenshot_MAP](images/MarkerMap.png)
+
+## Technologies
+- Python
+- Flask
+- WTForms
+- Jinja2
+- PostgreSQL
+- SQLAlchemy ORM
+- HTML
+- CSS
+- Twitter Bootstrap
+- JavaScript
+- JQuery
+- EasyAutocomplete
+- Google Places API
+- Google Maps API
 
 ## Features
 
-### User Login
+### User Handling
   - User registration, login, logout. 
   - Current user identification and access management (login required).
 
-### Dive site map:
+### Dive Map:
   - Dumpster markers include a popup info with:
     * Name of business (dumpster owner)
     * Dumpster address
@@ -18,15 +37,16 @@
     * Optimal dive time
     * Dive rating (from review)
     * Dive safety (from review)
-  - Marker data is populated through an API that pulls from the database.
+  - Marker data is populated by a JSON API created from the database.
 
 ### Add new dive review:
-  - If the new review is under an existing location:
+  - New Review Existing Site:
     * Autocomplete available - displays results from database.
     * New dive will be added to the database under the respective site.
-  - If the location does not exist in the database:
+  - New Reveiw New Site:
     * A new site will be added to the database.
-    * Then the dive will be added under the new site.
+    * Basic information submitted through the form (business name and address) will run through Google Places API to populate additional location details: latitude, longitude, business category, closing and opening time.
+    * Then the dive will be added in relation to the new site.
 
 ### User Profile "Dive Cards"
   - Displays each dive review as a card.
