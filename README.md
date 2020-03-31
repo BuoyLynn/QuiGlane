@@ -37,4 +37,4 @@
 
 
 ## Database
-![DB Model](/seed_data/glean_db_model.png)
+![DB Model](images/glean_db_model.png)
