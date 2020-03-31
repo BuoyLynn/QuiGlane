@@ -37,4 +37,4 @@
 
 
 ## Database
-![DB Model](https://app.diagrams.net?lightbox=1&highlight=0000ff&edit=_blank&layers=1&nav=1&title=DM_v1#Uhttps%3A%2F%2Fdrive.google.com%2Fuc%3Fid%3D1HTM_MW4hifuIn16dv6EHAhDm-ESIOKJd%26export%3Ddownload)
+![DB Model](/seed_data/glean_db_model.png)
