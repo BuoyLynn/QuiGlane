@@ -37,4 +37,4 @@
 
 
 ## Database
-![Alt text](addendum/db_glean_model.jpg?raw=true "Glean DB")
+![Alt text](seed_data/db_glean_model.jpg)
