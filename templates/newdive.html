@@ -6,49 +6,63 @@
 {% endblock %}
 
 {% block content %}
-	<div>
-		<h1>Hey, {{ current_user.user_name }}. How was your dive? </h1>
+	<div class="container">
+		<br>
+		<br>
+		<h1>Hey, <strong>{{ current_user.user_name }}</strong>. How was your dive? </h1>
 		<p>By adding a dive, you can build your profile and help others join the movement!</p>
-	
+		<br>
+		<br>
 	<form action="/add-dive/new" method="POST"> 
 		{{ form.hidden_tag() }}
 	
-		<fieldset class="form">		
+	<div class="form-row">		
 		
-		<div class="form-group" name="form-site-name-field">
+		<div class="form-group col-md-6" name="form-site-name-field">
 			{{ form.dive_name.label }}
-			{{ form.dive_name }}
+			{{ form.dive_name (class="form-control form-control-md")}}
 		</div>
-		<div class ="form-group" name="form-site-address-field">
+		<div class ="form-group col-md-6" name="form-site-address-field">
 			{{ form.dive_address.label }}
-			{{ form.dive_address }}
+			{{ form.dive_address (class="form-control form-control-md")}}
 		</div>
-		<div class ="form-group" id="textform">
+	
+	</div>
+	<div class="form-row">
+
+		<div class ="form-group col-md-3" id="textform">
 			{{ form.dive_day.label }}
 			{{ form.dive_day }}
 		</div>
-		<div class ="form-group" id="form-datefield">
+		<div class ="form-group col-md-3" id="form-datefield">
 			{{ form.dive_date.label }}
-			{{ form.dive_date }}
+			{{ form.dive_date (class="form-control form-control-md")}}
 		</div>
-		<div class ="form-group" id="form-timefield">
+		<div class ="form-group col-md-3" id="form-timefield">
 			{{ form.dive_time.label }}
-			{{ form.dive_time }}
+			{{ form.dive_time (class="form-control form-control-md") }}
 		</div>
-		<div class ="form-group" name="rating">
+		<div class ="form-group col-md-3" name="rating">
 			{{ form.rating.label }}
 			{{ form.rating }}
 		</div>
-		<div class ="form-group" id="form-boolfield">
-			{{ form.safety.label }}
-			If NO unbox: {{ form.safety }}
-		</div>
+
+	</div>
+
 		<div class ="form-group" id="textarea">
 			{{ form.items.label }} 
 			{{ form.items }}
 		</div>
 	
-	</fieldset>
+	<div class="form-row">	
+		<div class ="form-group col-md-6" id="form-boolfield">
+			{{ form.safety.label }}
+			If yes, give it a check {{ form.safety }}
+		</div>
+		
+		
+	</div>
+	
 
 		<div class="form">
 			{{ form.submit(class="btn btn-dark btn-sm") }}

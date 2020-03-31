@@ -19,6 +19,7 @@ bcrypt = Bcrypt(app)
 
 @login_manager.user_loader
 def load_user(user_id):
+    """User login manager -> will check for current_user"""
     return User.query.get(int(user_id))
 
 @app.route("/")
@@ -28,10 +29,10 @@ def home():
     return render_template("home.html", title="Go Glean!",
                                         marker=marker)
 
-# API Routes
+
 @app.route('/api/sites-info')
 def site_info():
-    """JSON Route to seed markers on Google Maps API"""
+    """JSON to seed markers on Google Maps API"""
     sites_dives = db.session.query(Site, Dive).outerjoin(Dive).all()    
     make_info_json = []
     for site, dive in sites_dives:
@@ -40,9 +41,7 @@ def site_info():
             dive.dive_time = dive.dive_time.strftime('%H%M')            
         else:
             dive.dive_time = 'Not Specified'
-    
-        
-        # print(f"site = {site} type(open_time) = {type(site.open_time)} open_time = {site.open_time} dive_id={dive.dive_id} site_id={site.site_id}")
+            
         if site.open_time or site.close_time:
         # if time is a str, convert to datettime
             if type(site.open_time) == str:
@@ -75,7 +74,7 @@ def site_info():
 
 @app.route('/api/sites-autocomp')
 def site_autocomp():
-    """JSON generation to feed AJAX for autocomplete in new-dive forms"""
+    """JSON to feed autocomplete in new-dive forms"""
     sites = db.session.query(Site.site_name, Site.address).all()
     site_name_auto_json = []
     for site in sites:
@@ -84,11 +83,11 @@ def site_autocomp():
         site_name_auto_json.append(site)
     
     return jsonify(site_name_auto_json)
-        
-        
+                
 
 @app.route("/login", methods=["GET", "POST"])
-def login():  
+def login():
+    """Login verification"""  
     if current_user.is_authenticated:
         flash(f"Let's get diving { current_user.user_name }!", "success")
         return redirect(url_for("home"))    
@@ -107,12 +106,13 @@ def login():
 @app.route("/logout")
 def logout():
     logout_user()
-    flash("See you later gleaner!")
+    flash("See you later gleaner!", "warning")
     return redirect(url_for("home"))
 
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
+    """User verification using forms: Will fail or validate on submit"""
     form = Register()
     if form.validate_on_submit():
         password_hash = bcrypt.generate_password_hash(form.password.data).decode("utf-8")
@@ -131,6 +131,10 @@ def register():
 @app.route("/add-dive/new", methods = ("GET", "POST"))
 @login_required
 def add_dive():
+    """Add new dive reivew
+        1. If site exists, take existing(matching) site_id and add to dive table.
+        2. If site does not exist, add new site, populate site information with the helpload (runs GOOG Places API) then add new dive review.
+    """
     form = Review()
     if request.method == "POST":
     # if form.validate_on_submit():
@@ -161,13 +165,14 @@ def add_dive():
 
             create_site = Site(site_name=dive_name, address=dive_address)
             db.session.add(create_site)
+            db.session.commit()
+
+            created_site = Site.query.filter(Site.site_name==dive_name, Site.address==dive_address).first()
 
             # run goog places api on new site to populate remaining fields
-            run_goog_places_api(dive_name, dive_address, create_site.site_id)
+            run_goog_places_api(dive_name, dive_address, created_site.site_id)
             
-            # Grab new site id to add to dive
-            new_site_id = db.session.query(Site.site_id).filter(Site.site_name==dive_name, Site.address==dive_address).first()[0]
-        
+            # add remaining dive review to db
             dive = Dive(                    
                         dive_day=form.dive_day.data,
                         dive_date=form.dive_date.data,
@@ -176,7 +181,7 @@ def add_dive():
                         safety=form.safety.data,
                         items=form.items.data,
                         user_id=current_user.user_id,
-                        site_id = new_site_id
+                        site_id = created_site.site_id
                         )
             
             db.session.add(dive)
@@ -184,18 +189,15 @@ def add_dive():
 
         # flash in dive_cards if successful
         flash(f"Thanks, {current_user.user_name}! Your dive has been added to your profile. You can now look up similar dives.", "success")
-        return redirect(url_for("dive_cards", user_id=current_user.user_id))
-    
-    # if fails to validate stay in newdive and flash (not working...keeps flaishing all the time...)
-    # elif not form.validate_on_submit():
-    #     flash(f"Looks like there was something missing from you dive review. Please try again.", "warning")            
-    
+        return redirect(url_for("dive_cards", user_id=current_user.user_id))    
+   
     return render_template("newdive.html", title="Save the Dive!", form=form)
     
 
 @app.route("/dive-cards/<int:user_id>")
 @login_required
 def dive_cards(user_id):
+    """User's profile page loads all dive reviews as cards (see template)"""
     user = User.query.filter_by(user_id=user_id).first_or_404()
     dives = Dive.query.filter_by(user_id=user_id).all()
     return render_template('profile.html', title=user.user_name, dives=dives)
@@ -204,6 +206,7 @@ def dive_cards(user_id):
 @app.route("/dive-cards/<int:dive_id>/update", methods=["GET", "POST"])
 @login_required
 def update_dive(dive_id):
+    """Update dive review while verifying current_user as author"""
     update_dive = Dive.query.get(dive_id)
     site = Site.query.filter_by(site_id=update_dive.site_id).first()
     if update_dive.user_id != current_user.user_id:
@@ -240,6 +243,7 @@ def update_dive(dive_id):
 @app.route("/dive-cards/<int:dive_id>/delete", methods=["POST"])
 @login_required
 def delete_dive(dive_id):
+    """Delete dive while verifying that current_user is author of dive"""
     delete_dive = Dive.query.get(dive_id)
     if delete_dive.user_id != current_user.user_id:
         
@@ -256,6 +260,7 @@ def delete_dive(dive_id):
 @app.route("/site-cards/<int:site_id>")
 @login_required
 def get_site_cards(site_id):
+    """Via user's dive, allow access to other dive reivews matching the site"""
     site = Site.query.filter_by(site_id=site_id).first_or_404()
     site_dives = Dive.query.filter_by(site_id=site_id).all() 
     return render_template('dives-from-card.html', title=site.site_name, site_dives=site_dives, site=site)

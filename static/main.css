@@ -9,3 +9,19 @@ body {
   color: #333333;
   margin-top: 5rem;
 }
+
+#register-header, #login-header{
+  text-align: center;
+}
+
+#register-sub-header, #login-sub-header{
+  text-align: center;
+}
+
+.register, .login, .base{
+  padding-bottom: 10rem;
+}
+
+.redirect{
+  color:#86c18c;
+}

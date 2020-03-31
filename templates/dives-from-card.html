@@ -2,11 +2,14 @@
 
 {% block content %}
    <!-- create card for each dive form card using bootstrap -->
-   <div>
+   <div class="container">
+      <br>
+      <br>
       <h2 class="site-card">{{ site.site_name }}</h2>
       <p class="message">Unlock more of reviews (per location) made by your fellow gleaners by adding a Dive Review Card.</p>
       <p class="redirect-login">Go back to my <a class="redirect-login" href="{{ url_for('dive_cards', user_id=current_user.user_id) }}">Dive Cards.</a></p>
-              
+      <br>
+      <br>        
       <div class="row row-cols-1 row-cols-md-3">
       {% for dive in site_dives[::-1] %}   
          {% if dive.user_id == current_user.user_id %}

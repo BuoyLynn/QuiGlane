@@ -1,16 +1,17 @@
 import os
 import json
 import requests
-from flask_sqlalchemy import SQLAlchemy
-from datetime import datetime, date, time
+from model import SQLAlchemy, datetime, Site, Dive, time
+
 
 db = SQLAlchemy()
 
 # In server, will be passing params (form.dive_name.data, form.dive_name.data)
 def run_goog_places_api(site_name, address, site_id):
+    """ Add to site details """
     
-    # update_site = site.query.filter_by(site_id=site_id).first()
-
+    # Query site by newly created site_id
+    update_site = Site.query.get(site_id)
     params = {
               'key': os.getenv("GOOGKEY"),
               'input': site_name + " " + address,
@@ -53,22 +54,17 @@ def run_goog_places_api(site_name, address, site_id):
                     close_t = site_details['result']['opening_hours']['periods'][0]['close']['time']                   
                 else:
                     close_t = open_t
-        # # If status not 'ok' and nothing is returned.
-        # open_t = "0000"
-        # close_t = "0000"            
-        # add to db.Site columns open_time & close_time
-                new_site = Site(site_name=dive_name, 
-                                address=dive_address,
-                                place_id=place_id,
-                                latitude=lat,
-                                longitude=lng,
-                                category=category,
-                                open_time=time(hour=int(open_t[0:2]), minute=int(open_t[2:4])),
-                                close_time=time(hour=int(close_t[0:2]), minute=int(close_t[2:4]))
-                                )
-                db.session.add(new_site)
+
+          
+                update_site.place_id = place_id
+                update_site.latitude = lat
+                update_site.longitude = lng
+                update_site.category = category
+                update_site.open_time = time(hour=int(open_t[0:2]), minute=int(open_t[2:4]))
+                update_site.close_time = time(hour=int(close_t[0:2]), minute=int(close_t[2:4]))
+
                 db.session.commit()
-        
+                
 
 
 

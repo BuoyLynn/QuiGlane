@@ -15,7 +15,7 @@ function initMap(){
 
     // draw base map centering to NY
     var map = new google.maps.Map(document.getElementById("map"),{
-        center: new google.maps.LatLng(40.7829, -73.9654),
+        center: new google.maps.LatLng(40.7645, -73.9745),
         zoom: 15
     }); // close base map
 

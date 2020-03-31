@@ -1,90 +1,119 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div>
+<div class="container register">
+	<br>
+	<br>
+	<h1 id="register-header">Qui Glane? </h1>
+	<h5 id="register-sub-header">Become a gleaner & start diving!</h5> 
+	<br>
+	<br>
+
 <form action="" method="POST"> <!--action="" will send to the same route-->
 	{{ form.hidden_tag() }} <!--hidden_tag() method adds a CSRF token-->
-	<fieldset class="form">
 		
-		<legend>Qui Glane? Join the dive here.</legend>
-		
-		<div class="form">
-			{{ form.user_name.label }}
-				
+	<!-- Create Unique Username (for validation requirments, go to forms) -->			
+	<div class="form-row">
+		<div class="form-group col-md-4"></div>		
+		<div class="form-group col-md-4">
+			{{ form.user_name.label }}				
 			{% if form.user_name.errors %}
 			<div class="input-error">
 				{% for error in form.user_name.errors %}
-					<span class="error-message" style="color:red; font-size: small">
-					{{ error }}
-					</span>
+				{{ form.user_name(class="form-control form-control-md is-invalid") }}
+				<span class="error-message" style="color:red; font-size: small">
+				{{ error }}
+				</span>
 				{% endfor %}
 			</div>
 			{% else %}
-				{{ form.user_name }}
+				{{ form.user_name(class="form-control form-control-md") }}
 			{% endif %}
 		</div>
-			
-		<div class="form">
+		<div class="form-group col-md-4"></div>	
+	</div>
+	
+	
+	<!-- Create Unique Email (for validation requirments, go to forms) -->
+	<div class="form-row">
+		<div class="form-group col-md-4"></div>		
+		<div class="form-group col-md-4">
 			{{ form.email.label }}
-
 			{% if form.email.errors %}
 			<div class="input-error">
 				{% for error in form.email.errors %}
-					<span class="error-message" style="color:red; font-size: small">
-					{{ error }}
-					</span>
+				{{ form.email(class="form-control form-control-md is-invalid") }}
+				<span class="error-message" style="color:red; font-size: small">
+				{{ error }}
+				</span>
 				{% endfor %}
-				</div>
-			{% else %}
-				{{ form.email }}
-			{% endif %}
 			</div>
+			{% else %}
+				{{ form.email(class="form-control form-control-md") }}
+			{% endif %}
+		</div>
+		<div class="form-group col-md-4"></div>	
+	</div>
 
-		<div class="form">
-			{{ form.password.label }}
-			
+	<!-- Create Password -->
+	<div class="form-row">
+		<div class="form-group col-md-4"></div>		
+		<div class="form-group col-md-4">
+			{{ form.password.label }}			
 			{% if form.password.errors %}
 			<div class="input-error">
 				{% for error in form.password.errors %}
-					<span class="error-message" style="color:red; font-size: small">
-					{{ error }}
-					</span>
+				{{ form.password(class="form-control form-control-md is-invalid") }}
+				<span class="error-message" style="color:red; font-size: small">
+				{{ error }}
+				</span>
 				{% endfor %}
-				</div>
-			{% else %}
-				{{ form.password }}
-			{% endif %}
 			</div>
+			{% else %}
+				{{ form.password(class="form-control form-control-md") }}
+			{% endif %}
+		</div>
+		<div class="form-group col-md-4"></div>	
+	</div>
 
-		<div class="form">
-			{{ form.confirm_password.label }}
-			
+	<!-- Confirm Password -->
+	<div class="form-row">
+		<div class="form-group col-md-4"></div>		
+		<div class="form-group col-md-4">
+			{{ form.confirm_password.label }}			
 			{% if form.confirm_password.errors %}
 			<div class="input-error">
 				{% for error in form.confirm_password.errors %}
-					<span class="error-message" style="color:red; font-size: small">
-					{{ error }}
-					</span>
+				{{ form.confirm_password(class="form-control form-control-md is-invalid") }}
+				<span class="error-message" style="color:red; font-size: small">
+				{{ error }}
+				</span>
 				{% endfor %}
-				</div>
-			{% else %}
-				{{ form.confirm_password }}
-			{% endif %}
 			</div>
+			{% else %}
+				{{ form.confirm_password (class="form-control form-control-md") }}
+			{% endif %}
+	</div>
+	<div class="form-group col-md-4"></div>	
+	</div>
 
-	</fieldset>
-
-	<div class="form">
-		{{ form.submit(class="btn btn-dark btn-sm") }}
+	<!-- Submit button -->
+	<div class="form-row">
+		<div class="form-group col-md-4"></div>		
+		<div class="form-group col-md-4">
+		{{ form.submit(class="btn btn-dark btn-sm") }}		
+		<br>
+		<p id="already-user-message"><small>Already a gleaner? 
+			<a class="redirect-login" href="{{ url_for('login') }}">Login</a>
+		</small></p>
+		</div>
+		<div class="form-group col-md-4"></div>	
 	</div>
 
 </form>
-	</div>
-	<div class="text-muted">
-		<p><small>Already a gleaner? 
-			<a class="redirect-login" href="{{ url_for('login') }}">Login</a>
-		</small></p>
+
 </div>
+
 
     
 {% endblock %}
