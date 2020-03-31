@@ -5,8 +5,8 @@ from flask_debugtoolbar import DebugToolbarExtension
 from forms import Register, Login, Review
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager, login_user, current_user, logout_user, login_required
-from model import User, Site, Dive, connect_to_db, db, datetime
-from helpload import run_goog_places_api, os
+# from model import User, Site, Dive, connect_to_db, db, datetime
+from helpload import run_goog_places_api, os, requests, json, SQLAlchemy, datetime, Site, Dive, User, time, connect_to_db, db
 
 app = Flask(__name__)
 
@@ -163,14 +163,11 @@ def add_dive():
         # if site not in db, add new row to 'sites' run goog api and populate Dive
         else:
 
-            create_site = Site(site_name=dive_name, address=dive_address)
-            db.session.add(create_site)
-            db.session.commit()
-
-            created_site = Site.query.filter(Site.site_name==dive_name, Site.address==dive_address).first()
-
+            created_site = Site(site_name=dive_name, address=dive_address)
+            # db.session.add(create_site)
+            
             # run goog places api on new site to populate remaining fields
-            run_goog_places_api(dive_name, dive_address, created_site.site_id)
+            run_goog_places_api(dive_name, dive_address, created_site)
             
             # add remaining dive review to db
             dive = Dive(                    
@@ -181,7 +178,7 @@ def add_dive():
                         safety=form.safety.data,
                         items=form.items.data,
                         user_id=current_user.user_id,
-                        site_id = created_site.site_id
+                        site = created_site
                         )
             
             db.session.add(dive)
@@ -223,7 +220,10 @@ def update_dive(dive_id):
         update_dive.safety = form.safety.data
         update_dive.items = form.items.data
         
-        db.session.commit()
+        # make sure to use the correct session transaction.
+        del_session = db.session.object_session(update_dive)
+        del_session.add(update_dive)
+        del_session.commit()
 
         flash(f"Your dive was successfully updated.", "success")
         return redirect(url_for("dive_cards", user_id=current_user.user_id))
@@ -245,16 +245,18 @@ def update_dive(dive_id):
 def delete_dive(dive_id):
     """Delete dive while verifying that current_user is author of dive"""
     delete_dive = Dive.query.get(dive_id)
+    
     if delete_dive.user_id != current_user.user_id:
         
         flash("Careful this is not your glean to delete! Karma karma karma.", "danger")
-        return redirect(url_for("home"))
+        return redirect(url_for("home"))    
     
-    db.session.delete(delete_dive)
-    db.session.commit()
+    del_session = db.session.object_session(delete_dive)
+    del_session.delete(delete_dive)
+    del_session.commit()
 
     flash(f"Your dive review was deleted. Hope to see you add another soon!", "dark")
-    return redirect(url_for("dive_cards", delte_dive=delete_dive, user_id=current_user.user_id))
+    return redirect(url_for("dive_cards", delete_dive=delete_dive, user_id=current_user.user_id))
 
 
 @app.route("/site-cards/<int:site_id>")

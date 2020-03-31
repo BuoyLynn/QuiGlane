@@ -46,8 +46,8 @@ function initMap(){
             '<div id="bodyContent">'+
             '<p>' + site.details +'</p>'+            
             '<p>Business closes at '+ closeTime +'</p>'+
-            '<p>Most recent dive time reported at '+ diveTime +'</p>'+
-            '<p>Most recent dive was rated: ' + site.rating + '</p>'+
+            '<p>Dive time reported at '+ diveTime +'</p>'+
+            '<p>Dive rated: ' + site.rating + '</p>'+
             '<p>Safety notes: ' + site.safety + '</p>'+
             '</div>'+
             '</div>';

@@ -17,7 +17,7 @@ class User(db.Model, UserMixin):
     # find a way for users to confirm email address
     password = db.Column(db.String(64), nullable=False)
     # twitter = db.Column(db.String(15), nullable=True)
-    dive = db.relationship("Dive", backref='user', lazy=True)
+    dive = db.relationship("Dive", backref='user', lazy=True, cascade_backrefs=True, cascade='all, delete-orphan')
 
     def get_id(self):
         return(self.user_id)
