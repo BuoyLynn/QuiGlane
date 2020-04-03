@@ -4,8 +4,6 @@
 
 > The app maps each dive review so that dumpster-divers can access and keep record of safe dives while connecting with one another to coordinate events.
 
-![screenshot_MAP](images/MarkerMap.png)
-
 ## Technologies
 - Python
 - Flask
@@ -16,9 +14,7 @@
 - HTML
 - CSS
 - Twitter Bootstrap
-- JavaScript
-- JQuery
-- EasyAutocomplete
+- JavaScript (JQuery/AJAX, JSON, EasyAutocomplete)
 - Google Places API
 - Google Maps API
 
@@ -38,6 +34,9 @@
     * Dive rating (from review)
     * Dive safety (from review)
   - Marker data is populated by a JSON API created from the database.
+
+  ![screenshot_MAP](images/MarkerMap.png | width=150)
+
 
 ### Add new dive review:
   - New Review Existing Site:
