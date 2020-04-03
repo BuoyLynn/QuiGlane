@@ -35,7 +35,7 @@
     * Dive safety (from review)
   - Marker data is populated by a JSON API created from the database.
 
-  ![<img src="images/MarkerMap.png" width="200"/>](images/MarkerMap.png)
+<img src="images/MarkerMap.png" width="200">
 
 
 ### Add new dive review:
