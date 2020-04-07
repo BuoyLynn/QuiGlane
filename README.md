@@ -6,8 +6,7 @@
 
 ## Technologies
 - Python
-- Flask
-- WTForms
+- Flask (WTForms, LoginManager)
 - Jinja2
 - PostgreSQL
 - SQLAlchemy ORM
@@ -24,6 +23,9 @@
   - User registration, login, logout. 
   - Current user identification and access management (login required).
 
+  <img src="images/userlogin.gif" width="500">
+
+
 ### Dive Map:
   - Dumpster markers include a popup info with:
     * Name of business (dumpster owner)
@@ -35,7 +37,7 @@
     * Dive safety (from review)
   - Marker data is populated by a JSON API created from the database.
 
-<img src="images/MarkerMap.png" width="500">
+<img src="images/mapmarker.gif" width="500">
 
 
 ### Add new dive review:
@@ -46,6 +48,9 @@
     * A new site will be added to the database.
     * Basic information submitted through the form (business name and address) will run through Google Places API to populate additional location details: latitude, longitude, business category, closing and opening time.
     * Then the dive will be added in relation to the new site.
+  
+<img src="images/newdive.gif" width="500">
+
 
 ### User Profile "Dive Cards"
   - Displays each dive review as a card.
@@ -54,6 +59,11 @@
       - Unlocked reviews unveil reviewers' unique username.
     * Each review card can be updated or deleted upon verification of user.
 
+<img src="images/profile.gif" width="500">
+
 
 ## Database
+> Relational database where each unique User and Site (dive location) can have multiple Dives (dive reviews), while each Dive remains unique to a User and a Site. 
+Each User is accounted for a Site through a Dive (review).
+
 ![DB Model](images/glean_db_model.png)
